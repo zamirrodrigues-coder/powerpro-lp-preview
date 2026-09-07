@@ -286,24 +286,24 @@
        tenho como arquivo, e essa foto já está no cache do visitante
        quando esta dobra aparece: dá a mesma textura sem pedir um
        download novo numa página de mídia paga. */
-    .dobra-dor { position: relative; overflow: hidden; background: #121212; }
-    .dobra-dor::before {
+    .dobra-dupla { position: relative; overflow: hidden; background: #121212; }
+    .dobra-dupla::before {
       content: ""; position: absolute; inset: 0;
       background: url("./assets/hero-painel-900.webp") center/cover no-repeat;
       filter: blur(7px) grayscale(.35) brightness(.26);
       transform: scale(1.08);   /* cobre a borda que o blur esfuma */
     }
-    .dobra-dor::after {
+    .dobra-dupla::after {
       content: ""; position: absolute; inset: 0;
       background: linear-gradient(105deg, rgb(13 13 13 / 96%) 38%, rgb(13 13 13 / 74%));
     }
-    .dobra-dor > .wrap { position: relative; z-index: 1; }
+    .dobra-dupla > .wrap { position: relative; z-index: 1; }
 
-    .dobra-dor .grade {
+    .dobra-dupla .grade {
       display: grid; gap: 44px;
     }
     @media (min-width: 62rem) {
-      .dobra-dor .grade {
+      .dobra-dupla .grade {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         gap: 72px; align-items: start;
       }
@@ -315,8 +315,8 @@
       letter-spacing: .13em; text-transform: uppercase;
     }
 
-    .dobra-dor h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
-    .dobra-dor h2 em { font-style: normal; color: var(--brand); }
+    .dobra-dupla h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
+    .dobra-dupla h2 em { font-style: normal; color: var(--brand); }
 
     /* Situações: título e explicação, separadas por filete. Sem caixa e
        sem marcador, para não repetir o vocabulário que a revisão anti-IA
@@ -329,6 +329,18 @@
       letter-spacing: -.015em; color: var(--text); margin: 0 0 6px;
     }
     .situacoes p { margin: 0; color: var(--text-soft); max-width: 42ch; }
+
+    /* Cada dobra dupla desloca o fundo, para as três não parecerem a mesma
+       chapa repetida ao rolar. É a mesma imagem, já em cache. */
+    .dobra-dupla.girada::before { background-position: 78% center; transform: scale(1.12) scaleX(-1); }
+
+    /* Assinatura no pé da coluna de texto, como no terceiro mockup. */
+    .assinatura {
+      margin: 52px 0 0; font-size: .7rem; font-weight: 700;
+      letter-spacing: .13em; text-transform: uppercase;
+      color: var(--text-muted); line-height: 1.9;
+    }
+    .assinatura span { display: block; color: rgb(141 135 129 / 78%); }
 
     /* Ação em linha, como no mockup: sublinhado e seta, sem caixa. */
     .cta.linha {
@@ -580,7 +592,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ══ BLOCO 2 · Dor principal ═══════════════════════════════ -->
 <!-- Réplica do segundo mockup aprovado pelo Zamir em 07/09/2026. -->
-<section class="dobra-dor">
+<section class="dobra-dupla">
   <div class="wrap">
     <div class="grade">
 
@@ -625,23 +637,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ══ BLOCO 3 · Transformação desejada ══════════════════════ -->
-<section>
+<!-- Réplica do terceiro mockup aprovado pelo Zamir em 07/09/2026. -->
+<section class="dobra-dupla girada">
   <div class="wrap">
-    <h2>Um fornecedor técnico só seu, sempre que precisar</h2>
-    <p class="lead">Sem depender de indicação de última hora. Com a Power Pro, sua empresa tem uma equipe especializada para chamar sempre que surgir uma necessidade elétrica, com histórico, documentação e previsibilidade.</p>
+    <div class="grade">
 
-    <div class="grid dois">
-      <div class="card"><p>Menos tempo de máquina parada</p></div>
-      <div class="card"><p>Documentação técnica organizada (RT, laudo)</p></div>
-      <div class="card"><p>Relação de longo prazo com quem já conhece sua planta</p></div>
-      <div class="card"><p>Tranquilidade de estar em conformidade com normas de segurança</p></div>
+      <div>
+        <p class="rotulo-dobra">Um Fornecedor para Contar</p>
+
+        <h2>Um fornecedor técnico só seu, <em>sempre que precisar.</em></h2>
+
+        <p class="lead">Sem depender de indicação de última hora. Com a Power Pro, sua empresa tem uma equipe especializada para chamar sempre que surgir uma necessidade elétrica — com histórico, documentação e previsibilidade.</p>
+
+        <p class="cta-wrap">
+          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20fornecedor%20el%C3%A9trico%20de%20confian%C3%A7a%20para%20a%20minha%20empresa.">
+            <span>Quero um fornecedor elétrico de confiança</span>
+            <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
+              <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </p>
+
+        <p class="assinatura">
+          Power Pro · Soluções Elétricas
+          <span>Atendimento em Novo Hamburgo e região metropolitana</span>
+        </p>
+      </div>
+
+      <div class="situacoes">
+        <div>
+          <h3>Menos tempo de máquina parada</h3>
+          <p>Mais continuidade para a sua produção.</p>
+        </div>
+        <div>
+          <h3>Documentação técnica organizada</h3>
+          <p>RT e laudo quando aplicável.</p>
+        </div>
+        <div>
+          <h3>Quem já conhece sua planta</h3>
+          <p>Histórico e continuidade no atendimento.</p>
+        </div>
+        <div>
+          <h3>Conformidade e segurança</h3>
+          <p>Mais tranquilidade para a operação.</p>
+        </div>
+      </div>
+
     </div>
-
-    <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20fornecedor%20el%C3%A9trico%20de%20confian%C3%A7a%20para%20a%20minha%20empresa.">
-        Quero um fornecedor elétrico de confiança
-      </a>
-    </p>
   </div>
 </section>
 
