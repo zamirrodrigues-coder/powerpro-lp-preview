@@ -209,10 +209,11 @@
     .hero-foto { position: relative; min-height: 15rem; }
     .hero-foto img {
       width: 100%; height: 100%; object-fit: cover;
-      /* Enquadra como no mockup: o quadro de comando entra pela esquerda e o
-         técnico fica à direita. Puxar mais para a direita cortava o painel,
-         que é o assunto da foto. */
-      object-position: 52% center;
+      /* Enquadramento calibrado para a foto do uniforme: em 62% o painel de
+         comando aparece inteiro à direita, o logo nas costas do técnico fica
+         legível, e sobra pouco do corredor vazio da esquerda, que é justamente
+         a parte que a máscara dissolve no preto. */
+      object-position: 62% center;
     }
     @media (min-width: 62rem) {
       .hero-foto { min-height: 100%; }
@@ -568,7 +569,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              srcset="./assets/hero-painel-900.jpg 900w, ./assets/hero-painel.jpg 1600w"
              sizes="(min-width: 62rem) 52vw, 100vw"
              width="1600" height="900" fetchpriority="high" decoding="async"
-             alt="Técnico da Power Pro fazendo manutenção em um quadro de comando elétrico dentro de uma indústria">
+             alt="Eletricista da Power Pro, de uniforme azul e amarelo da empresa, fazendo manutenção em um quadro de comando elétrico dentro de uma indústria">
       </picture>
       <p class="hero-local">Novo Hamburgo e região metropolitana</p>
     </div>
