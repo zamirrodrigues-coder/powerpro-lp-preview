@@ -52,6 +52,11 @@
          Android. */
       --font-text:  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --font-title: Georgia, "Times New Roman", "Noto Serif", serif;
+      /* Sinal de conferido dos serviços. Desenhado aqui e não como arquivo:
+         são 20px, e um pedido de rede a mais numa página de mídia paga custa
+         mais do que o ícone pesa. O traço é preto de propósito: a cor vem da
+         máscara em `.servicos > div::before`, não daqui. */
+      --icone-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8.4 12.3 2.5 2.5 4.7-5.1'/%3E%3C/svg%3E");
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -205,12 +210,6 @@
       display: block; margin-top: 3px; font-style: normal;
       font-size: .66rem; font-weight: 600; letter-spacing: .19em;
       text-transform: uppercase; color: var(--text-muted);
-    }
-
-    .hero-linha {
-      margin: 0 0 14px; color: var(--brand);
-      font-size: .8rem; font-weight: 700;
-      letter-spacing: .11em; text-transform: uppercase;
     }
 
     .hero h1 { margin-bottom: 20px; font-size: clamp(2rem, 4.6vw, 3.15rem); }
@@ -410,9 +409,16 @@
       padding: 16px 0; border-top: 1px solid var(--line-soft);
       color: var(--text-soft);
     }
+    /* O sinal de conferido no lugar do traço, pedido em 08/09. Vem por máscara,
+       não por `background-image`: assim quem pinta o ícone é `var(--brand)`, e
+       ele acompanha a cor da marca se ela mudar. Um data URI em background
+       ficaria com o laranja congelado dentro do SVG. */
     .servicos > div::before {
-      content: ""; flex: 0 0 auto; width: 22px; height: 2px;
-      background: var(--brand); transform: translateY(-.35em);
+      content: ""; flex: 0 0 auto; width: 20px; height: 20px;
+      background: var(--brand);
+      -webkit-mask: var(--icone-check) center / contain no-repeat;
+              mask: var(--icone-check) center / contain no-repeat;
+      transform: translateY(.28em);
     }
 
     /* ── Contraste ───────────────────────────────────────────────
@@ -639,8 +645,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <img class="logo-marca" src="./assets/logo-power-pro-v3.png" alt="Power Pro Soluções Elétricas" width="440" height="119" decoding="async">
   </p>
 
-      <p class="hero-linha">Eletricista Residencial · Novo Hamburgo e Região</p>
-
+      <!-- A linha "Eletricista Residencial · Novo Hamburgo e Região" saiu em
+           08/09: repetia palavra por palavra o H1 logo abaixo. Nada se perde de
+           palavra-chave, o próprio H1 carrega o termo e a região. Na industrial
+           a mesma linha continua, porque lá o H1 vai por outro caminho. -->
       <h1>Eletricista residencial em Novo Hamburgo <em>e região</em></h1>
 
       <p class="lead">Disjuntor desarmando, cheiro de queimado ou fumaça? Diagnóstico técnico no local, explicado em linguagem simples, com atendimento rápido em toda a região metropolitana.</p>
