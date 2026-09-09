@@ -22,11 +22,7 @@
     :root {
       --bg:          #1a1a1a;
       --hero-bg:     #0d0d0d;   /* o preto da primeira dobra, do mockup */
-      --bg-soft:     #212121;
-      --bg-tile:     #272727;
       --brand:       #c85a2e;
-      --brand-dark:  #a8481f;
-      --brand-soft:  rgb(200 90 46 / 12%);
       --accent:      #f2c230;
       --text:        #f5f3f0;
       --text-soft:   #c2bdb6;
@@ -40,8 +36,12 @@
          teto próprio e as seções um container centralizado: o texto pulava
          quase 200px para a direita na primeira rolagem. */
       --borda:       max(var(--gutter), calc((100vw - var(--content)) / 2 + var(--gutter)));
-      --radius:      14px;
-      --radius-sm:   10px;
+      /* Ritmo vertical: uma base e seus múltiplos, em vez de valores avulsos.
+         Mesma escala da rev03. Antes toda seção tinha 60px fixos em cima e
+         embaixo e um filete embaixo de cada uma: doze divisórias idênticas na
+         rolagem, sem hierarquia entre o que fecha um assunto e o que separa
+         dois. */
+      --v1: 8px;  --v2: 16px; --v3: 24px; --v4: 32px; --v6: 48px; --v8: 64px; --v12: 96px;
       /* Duas famílias, no mesmo molde da LP da Cia Athletica: sem webfont, sem
          custo de carregamento numa página de mídia paga. A condensada no corpo
          e a preta no display dão o peso industrial que a stack de sistema não
@@ -73,8 +73,11 @@
 
     .wrap { width: 100%; max-width: var(--content); margin: 0 auto; padding-inline: var(--gutter); }
 
-    section { padding: 60px 0; border-bottom: 1px solid var(--line-soft); }
-    section:last-of-type { border-bottom: 0; }
+    section { padding-block: var(--v12); }
+    /* O filete separa DUAS seções, então mora entre elas: pendurado embaixo de
+       cada uma, ele também aparecia depois da última e antes do rodapé, e
+       repetia a mesma divisória doze vezes sem dizer nada. */
+    section + section { border-top: 1px solid var(--line-soft); }
 
     /* As eyebrows sairam. Elas rotulavam a pagina com o nome dos blocos do
        briefing ("O Problema", "Prova Social", "Objecoes"): vocabulario interno
@@ -94,54 +97,63 @@
 
     strong { color: var(--text); font-weight: 700; }
 
-    /* ── CTA ───────────────────────────────────────────────── */
+    /* ── Botão pill com a seta correndo ──────────────────────────
+       Formato da rev03, pedido pelo Zamir. O rótulo e o círculo são dois
+       corpos colados, e no hover a seta sai por cima enquanto outra entra
+       por baixo, dando a impressão de uma só girando.
+
+       Antes esta página tinha QUATRO tratamentos de botão convivendo
+       (cheio, destaque, contorno e linha). Agora são dois: o pill nos três
+       momentos de peso (abertura, fecho e barra fixa) e o link com seta nos
+       dez intermediários. A MARCAÇÃO não muda: continuam âncora com href
+       real de wa.me, senão o widget do ScaleAds deixa de assumir e o lead
+       não nasce. */
     .cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--brand); color: #fff; text-decoration: none;
-      font-size: 1rem; font-weight: 700; line-height: 1.3;
-      padding: 16px 26px; border-radius: var(--radius-sm);
-      border: 0; cursor: pointer; text-align: left;
-      transition: background .18s ease, transform .18s ease;
+      display: inline-flex; align-items: stretch; gap: 0;
+      text-decoration: none; border: 0; padding: 0; background: none;
+      font: inherit; cursor: pointer;
     }
-    .cta:hover, .cta:focus-visible { background: var(--brand-dark); }
-    .cta:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-    .cta svg { flex: 0 0 auto; }
-    .cta-wrap { margin-top: 26px; }
+    .cta .rotulo-cta {
+      display: flex; align-items: center;
+      background: var(--brand); color: #fff;
+      font-weight: 700; letter-spacing: -0.004em; line-height: 1.3;
+      padding: 17px 30px; border-radius: 999px;
+      transition: background .5s ease, color .5s ease;
+    }
+    .cta .disco {
+      position: relative; overflow: hidden; flex: 0 0 auto;
+      width: 58px; border-radius: 999px;
+      background: var(--brand); color: #fff;
+      transition: background .5s ease, color .5s ease;
+    }
+    .cta .disco svg {
+      position: absolute; top: 50%; left: 50%; width: 20px; height: 20px;
+      transition: transform .5s ease;
+    }
+    .cta .disco .sai   { transform: translate(-50%, -50%); }
+    .cta .disco .entra { transform: translate(-50%, 210%); }
+    .cta:hover .rotulo-cta, .cta:hover .disco { background: var(--accent); color: #17120a; }
+    .cta:hover .disco .sai   { transform: translate(180%, -240%); }
+    .cta:hover .disco .entra { transform: translate(-50%, -50%); }
+    .cta:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 999px; }
 
-    /* Botão da primeira dobra, no formato do mockup: marca do WhatsApp à
-       esquerda, seta à direita. A seta anda um passo no hover, o suficiente
-       para o botão responder sem virar animação. */
-    .cta.destaque {
-      padding: 18px 24px; font-size: 1.05rem; gap: 14px;
-      align-items: center;
+    /* Ação secundária: sem caixa, só sublinhado e seta. A área de toque tem
+       piso de 44px: os dois botões das dobras escuras mediam 29px de altura
+       no celular, abaixo do mínimo de alvo. */
+    .cta-texto {
+      display: inline-flex; align-items: center; gap: 12px;
+      min-height: 44px;
+      color: var(--brand); text-decoration: none;
+      font-weight: 700; letter-spacing: -0.004em;
+      padding-bottom: 5px; border-bottom: 1px solid rgb(200 90 46 / 45%);
+      transition: color .3s ease, border-color .3s ease;
     }
-    .cta.destaque .rotulo-cta { flex: 1 1 auto; }
-    .cta.destaque .seta { transition: transform .18s ease-out; }
-    .cta.destaque:hover .seta { transform: translateX(3px); }
-    @media (prefers-reduced-motion: reduce) {
-      .cta.destaque .seta, .cta.destaque:hover .seta { transition: none; transform: none; }
-    }
+    .cta-texto svg { flex: 0 0 auto; transition: transform .3s ease; }
+    .cta-texto:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .cta-texto:hover svg { transform: translateX(4px); }
+    .cta-texto:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 
-    /* Treze botões laranja idênticos davam ritmo mecânico à rolagem. O peso
-       cheio fica no hero, no fecho e na barra fixa; os dez intermediários
-       viram contorno. A MARCAÇÃO não muda: continuam âncora com href real de
-       wa.me, senão o widget do ScaleAds deixa de assumir e o lead não nasce. */
-    .cta.secundario {
-      background: transparent; color: var(--brand);
-      border: 1.5px solid var(--brand); padding: 14px 24px;
-    }
-    .cta.secundario:hover, .cta.secundario:focus-visible {
-      background: var(--brand-soft); color: var(--text);
-    }
-
-    /* ── Selo / faixa ──────────────────────────────────────── */
-    .selo {
-      display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px;
-      background: var(--brand-soft); border: 1px solid rgb(200 90 46 / 35%);
-      color: var(--accent); border-radius: 99px;
-      padding: 7px 16px; font-size: .8rem; font-weight: 700;
-      margin-bottom: 20px;
-    }
+    .cta-wrap { margin-top: var(--v6); }
 
     /* ═══ PRIMEIRA DOBRA ═══════════════════════════════════════
        Réplica do mockup: texto à esquerda sobre preto, foto do
@@ -352,83 +364,47 @@
     }
     .assinatura span { display: block; color: rgb(141 135 129 / 78%); }
 
-    /* Ação em linha, como no mockup: sublinhado e seta, sem caixa. */
-    .cta.linha {
-      background: transparent; border: 0; padding: 0;
-      color: var(--brand); font-weight: 700;
-      border-bottom: 2px solid var(--brand);
-      border-radius: 0; padding-bottom: 6px; gap: 12px;
-    }
-    .cta.linha:hover, .cta.linha:focus-visible {
-      background: transparent; color: var(--accent); border-bottom-color: var(--accent);
-    }
-    .cta.linha .seta { transition: transform .18s ease-out; }
-    .cta.linha:hover .seta { transform: translateX(4px); }
-    @media (prefers-reduced-motion: reduce) {
-      .cta.linha .seta, .cta.linha:hover .seta { transition: none; transform: none; }
-    }
-
-    /* ── Grades ────────────────────────────────────────────── */
-    .grid { display: grid; gap: 16px; margin-top: 28px; }
-    @media (min-width: 720px) { .grid.dois { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .grid.tres { grid-template-columns: repeat(3, 1fr); } }
-
-    .card {
-      background: var(--bg-tile); border: 1px solid var(--line);
-      border-radius: var(--radius); padding: 22px;
-    }
-    .card p:last-child { margin-bottom: 0; }
-    .card .num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 34px; height: 34px; border-radius: 9px;
-      background: var(--brand); color: #fff;
-      font-weight: 800; font-size: .95rem; margin-bottom: 14px;
-    }
-
-    .lista { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 12px; }
-    .lista li {
-      position: relative; padding: 14px 18px 14px 44px;
-      background: var(--bg-tile); border: 1px solid var(--line);
-      border-radius: var(--radius-sm); color: var(--text-soft);
-    }
-    .lista li::before {
-      content: ""; position: absolute; left: 18px; top: 22px;
-      width: 8px; height: 8px; border-radius: 2px; background: var(--accent);
-    }
-    .lista li strong { display: block; margin-bottom: 2px; }
+    /* ── Blocos de conteúdo ──────────────────────────────────────
+       Duas colunas de itens, cada um aberto por um filete. Substitui a
+       `lista`, que punha cada item numa caixa escura com marcador quadrado
+       laranja: nove caixas iguais em dois blocos seguidos, o vocabulário que
+       o Zamir chamou de designer de IA. O filete diz a mesma coisa (aqui
+       começa outro item) sem desenhar um objeto que não existe. */
+    .duplo { display: grid; gap: 0 var(--v12); margin-top: var(--v6); }
+    @media (min-width: 56rem) { .duplo { grid-template-columns: 1fr 1fr; } }
+    .duplo > div { padding: 22px 0; border-top: 1px solid var(--line-soft); }
+    .duplo p { margin: 0; max-width: 42ch; }
 
     /* ── Régua de circuitos ────────────────────────────────────
        A assinatura da página, e a única peça que se permite ser
-       memorável. Os dez serviços não são bullets: são as linhas
-       de um quadro de comando, identificadas de C01 a C10 e
-       penduradas num barramento. Vem do objeto que o cliente
-       monta todo dia, e a numeração diz algo verdadeiro: são
-       frentes distintas, não uma sequência a percorrer. */
-    .circuitos {
-      list-style: none; margin: 30px 0 0; padding: 0 0 0 2px;
-      counter-reset: circuito;
-      border-left: 2px solid var(--brand);
+       memorável. Os serviços não são bullets: são as linhas de um
+       quadro de comando, identificadas de C01 em diante e penduradas
+       num barramento. Vem do objeto que o cliente monta todo dia.
+
+       CORREÇÃO 08/09: esta régua estava MORTA. O CSS mirava `li` e a marcação
+       da página usa `div`, então nenhuma das regras pegava e os cinco serviços
+       saíam como cinco linhas soltas, sem numeração e sem filete. Os seletores
+       abaixo são os da rev03, que casam com a marcação de verdade. */
+    .circuitos { margin: var(--v6) 0 0; counter-reset: c; }
+    .circuitos > div {
+      display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 16px;
+      align-items: baseline; padding: 15px 0;
+      border-top: 1px solid var(--line-soft);
     }
-    .circuitos li {
-      counter-increment: circuito;
-      position: relative;
-      display: flex; align-items: baseline; gap: 14px;
-      padding: 14px 0 14px 22px;
-      border-bottom: 1px solid var(--line-soft);
-      color: var(--text-soft);
+    .circuitos > div:last-child { border-bottom: 1px solid var(--line-soft); }
+    .circuitos > div::before {
+      content: "C" counter(c, decimal-leading-zero); counter-increment: c;
+      font-variant-numeric: tabular-nums; font-size: .76rem;
+      font-weight: 700; letter-spacing: .07em; color: var(--brand);
     }
-    .circuitos li:last-child { border-bottom: 0; }
-    .circuitos li::before {
-      content: "C" counter(circuito, decimal-leading-zero);
-      flex: 0 0 auto; min-width: 32px;
-      font-family: var(--font-title); font-size: .76rem;
-      letter-spacing: .05em; color: var(--accent);
-    }
-    /* o terminal: traço curto saindo do barramento até a linha */
-    .circuitos li::after {
-      content: ""; position: absolute; left: -2px; top: 50%;
-      width: 12px; height: 2px; background: var(--brand);
-    }
+    .circuitos span { color: var(--text-soft); }
+    @media (min-width: 62rem) { .circuitos { columns: 2; column-gap: 4rem; } .circuitos > div { break-inside: avoid; } }
+
+    /* O roteiro de atendimento usa a mesma régua, numerada de 1 a 5 em vez de
+       C01: são passos em ordem, não frentes distintas. Antes eram cinco cards
+       com o número num quadrado laranja. */
+    .circuitos.passos > div::before { content: counter(c); counter-increment: c; }
+    @media (min-width: 62rem) { .circuitos.passos { columns: 1; } }
 
     /* ── Ficha de dados ────────────────────────────────────────
        O bloco de autoridade traz FATOS institucionais, não
@@ -447,46 +423,48 @@
     }
     .dados dd { margin: 0; color: var(--text-soft); }
 
-    /* ── Depoimentos ───────────────────────────────────────── */
-    .estrelas { color: var(--accent); font-size: 1.05rem; letter-spacing: .12em; margin-bottom: 6px; }
-    blockquote {
-      margin: 0 0 14px; color: var(--text-soft); font-style: normal;
-    }
-    .autor { font-size: .85rem; font-weight: 700; color: var(--text); margin: 0; }
-    .autor span { display: block; font-weight: 500; color: var(--text-muted); font-size: .8rem; }
+    /* ── Depoimentos ─────────────────────────────────────────────
+       Três avaliações reais do Google. Cada uma abre com um filete, em vez
+       de morar numa caixa de fundo próprio, e o card em destaque saiu: a
+       moldura mais clara sugeria depoimento patrocinado, e a ordem já põe
+       primeiro o que responde à objeção mais comum deste público. */
+    .vozes { display: grid; gap: 0; margin-top: var(--v6); }
+    @media (min-width: 62rem) { .vozes { grid-template-columns: repeat(3, 1fr); gap: 0 var(--v6); } }
+    .vozes figure { margin: 0; padding: 26px 0; border-top: 1px solid var(--line-soft); }
+    .vozes blockquote { margin: 0 0 14px; color: var(--text-soft); font-style: normal; }
+    .vozes figcaption { font-weight: 700; font-size: .93rem; color: var(--text); }
+    .estrelas { color: var(--accent); font-size: .95rem; letter-spacing: .2em; margin: 0 0 10px; }
 
     /* ── Objeções ──────────────────────────────────────────── */
-    .objecao { border-left: 3px solid var(--accent); padding-left: 18px; margin-bottom: 26px; }
-    .objecao .fala { font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .objecao { margin: 0 0 26px; max-width: 58ch; }
+    .objecao .fala { font-weight: 700; color: var(--text); margin-bottom: 5px; }
     .objecao .resposta { margin-bottom: 0; }
 
-    /* ── FAQ ───────────────────────────────────────────────── */
-    details {
-      background: var(--bg-tile); border: 1px solid var(--line);
-      border-radius: var(--radius-sm); margin-bottom: 10px;
-    }
-    details[open] { border-color: rgb(200 90 46 / 42%); }
+    /* ── FAQ ─────────────────────────────────────────────────────
+       Filete e cruz que gira, no lugar de cinco caixas com fundo, borda e
+       um `+` grande. O sinal continua dizendo abre/fecha, sem desenhar um
+       painel em volta de cada pergunta. */
+    details { border-top: 1px solid var(--line-soft); }
+    details:last-of-type { border-bottom: 1px solid var(--line-soft); }
     summary {
-      cursor: pointer; padding: 17px 46px 17px 20px; position: relative;
-      font-weight: 700; color: var(--text); list-style: none;
+      cursor: pointer; list-style: none; position: relative;
+      padding: 20px 40px 20px 0; font-weight: 700; color: var(--text);
     }
     summary::-webkit-details-marker { display: none; }
-    summary::after {
-      content: "+"; position: absolute; right: 20px; top: 50%;
-      transform: translateY(-50%); color: var(--brand);
-      font-size: 1.4rem; font-weight: 700; line-height: 1;
+    summary::before, summary::after {
+      content: ""; position: absolute; right: 4px; top: 50%;
+      width: .7rem; height: 1px; background: var(--text-muted);
+      transition: transform .3s ease;
     }
-    details[open] summary::after { content: "–"; }
-    summary:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; border-radius: var(--radius-sm); }
-    details p { padding: 0 20px 18px; margin: 0; }
+    summary::after { transform: rotate(90deg); }
+    details[open] summary::after { transform: rotate(0deg); }
+    summary:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+    details p { padding-bottom: 22px; margin: 0; max-width: 62ch; }
 
-    /* ── Garantia e fecho ──────────────────────────────────── */
-    .destaque-bloco {
-      background: var(--bg-tile);
-      border: 1px solid rgb(200 90 46 / 30%);
-      border-radius: var(--radius); padding: 34px 26px;
-    }
+    /* ── Fecho ─────────────────────────────────────────────── */
     .fecho { text-align: center; }
+    .fecho h2 { margin-left: auto; margin-right: auto; }
+    .fecho .cta-wrap { display: flex; justify-content: center; }
     .fecho .lead { margin-left: auto; margin-right: auto; }
 
     /* ── Rodapé ────────────────────────────────────────────── */
@@ -501,22 +479,22 @@
 
     /* ── Barra fixa ────────────────────────────────────────── */
     .barra {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
-      background: rgb(19 19 19 / 96%); border-top: 1px solid var(--line);
-      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-      backdrop-filter: blur(8px);
+      position: fixed; inset: auto 0 0 0; z-index: 900;
+      padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgb(19 19 19 / 97%) 55%, rgb(19 19 19 / 0%));
+      backdrop-filter: blur(12px);
     }
-    .barra .cta { width: 100%; justify-content: center; padding: 15px 20px; }
-    @media (min-width: 900px) {
-      .barra { left: auto; right: 24px; bottom: 24px; border: 0; background: none; padding: 0; backdrop-filter: none; }
+    .barra .cta { width: 100%; }
+    .barra .cta .rotulo-cta { flex: 1 1 auto; justify-content: center; padding-block: 14px; }
+    @media (min-width: 56rem) {
+      .barra { inset: auto 28px 28px auto; padding: 0; background: none; backdrop-filter: none; }
       .barra .cta { width: auto; }
-      footer { padding-bottom: 44px; }
+      footer { padding-bottom: 72px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .cta { transition: none; }
-      .cta:hover { transform: none; }
+      *, *::before, *::after { transition-duration: 1ms !important; }
     }
 
     /* ═══ ESPECÍFICO DA RESIDENCIAL ════════════════════════════
@@ -528,25 +506,22 @@
       margin: 14px 0 0; font-size: .88rem; color: var(--text-muted);
     }
 
-    /* Os três selos vêm prontos da Power Pro e o texto deles não se
-       altera. Ficam juntos, separados do resto dos diferenciais. */
+    /* Os três selos vêm prontos da Power Pro e o TEXTO deles não se altera:
+       a copy exige as três frases exatas. O que mudou foi o contorno. Eram
+       três caixas laranja lado a lado logo abaixo de cinco caixas escuras,
+       oito objetos empilhados num bloco só. Agora são três marcas de texto
+       separadas por filete, no mesmo desenho da faixa de termos da rev03. */
     .selos {
-      display: grid; gap: 10px; margin-top: 26px;
-      padding-top: 24px; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: var(--v2) 0;
+      margin-top: var(--v6); padding-top: var(--v4);
+      border-top: 1px solid var(--line-soft);
     }
-    @media (min-width: 46rem) { .selos { grid-template-columns: repeat(3, 1fr); } }
     .selos span {
-      display: block; padding: 14px 16px;
-      border: 1px solid rgb(200 90 46 / 38%); border-radius: var(--radius-sm);
-      background: var(--brand-soft);
-      font-family: var(--font-title); font-size: .82rem; font-weight: 900;
-      letter-spacing: .04em; text-transform: uppercase; color: var(--accent);
-      text-align: center;
+      padding: 0 22px; border-left: 1px solid var(--line);
+      font-size: .78rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; color: var(--brand);
     }
-
-    /* O depoimento da Adriana responde direto à objeção mais comum deste
-       público, que é o profissional que não aparece. A copy pede destaque. */
-    .card.principal { border-color: rgb(200 90 46 / 45%); background: #2b2320; }
+    .selos span:first-child { padding-left: 0; border-left: 0; }
 
     /* Logotipo oficial da Power Pro, recebido em 08/09. Funciona direto sobre o
        fundo escuro porque as letras já têm contorno claro no próprio desenho da
@@ -559,6 +534,8 @@
        Estas regras vêm no fim de propósito: têm a mesma especificidade das
        declarações base, então quem decide é a ordem. */
     @media (max-width: 46rem) {
+      section { padding-block: var(--v8); }
+
       /* A faixa era lista flexível: ao quebrar linha, o traço reaparecia no
          começo de cada uma, em posições diferentes. Vira grade de duas colunas,
          com o traço sempre na mesma, um debaixo do outro. */
@@ -567,6 +544,21 @@
       }
       .faixa-servicos span { padding: 0; border-left: 0; }
       .faixa-servicos span:nth-child(even) { padding-left: 22px; border-left: 1px solid var(--line, rgb(255 255 255 / 11%)); }
+
+      /* Três selos não cabem numa linha no celular, e com o filete à esquerda
+         o item que quebrava levava o traço órfão para o começo da linha.
+         Empilham, cada um com um filete em cima. */
+      .selos { display: grid; gap: 0; }
+      .selos span {
+        padding: 12px 0; border-left: 0;
+        border-top: 1px solid var(--line-soft);
+      }
+      .selos span:first-child { padding-top: 12px; }
+
+      /* O fecho fica alinhado à esquerda como o resto da página: centralizado
+         num vão estreito, o texto vira quatro linhas em bandeira. */
+      .fecho { text-align: left; }
+      .fecho .cta-wrap { justify-content: flex-start; }
 
       /* O botão da abertura repetia o rótulo da barra fixa, logo acima dela.
          Sai por CSS e não do HTML: a âncora continua no documento e o widget do
@@ -598,15 +590,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="lead">Disjuntor desarmando, cheiro de queimado ou fumaça? Diagnóstico técnico no local, explicado em linguagem simples, com atendimento rápido em toda a região metropolitana.</p>
 
       <p class="cta-wrap">
-        <a class="cta destaque" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
-          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/>
-            <path fill="currentColor" d="M15.7 13.6c-.2-.1-1.3-.640-1.5-.71-.2-.08-.35-.11-.5.11-.14.22-.56.71-.69.86-.13.14-.25.16-.47.05-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.14-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38h-.42c-.15 0-.39.05-.59.28-.2.22-.77.76-.77 1.84s.79 2.13.9 2.28c.11.15 1.56 2.38 3.78 3.34.53.23.94.36 1.26.46.53.17 1.01.14 1.39.09.42-.06 1.3-.53 1.49-1.05.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26z"/>
-          </svg>
+        <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
           <span class="rotulo-cta">Fale com um especialista</span>
-          <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
-            <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <span class="disco">
+            <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </span>
         </a>
       </p>
 
@@ -631,7 +620,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              srcset="./assets/hero-residencial-v2-900.jpg 900w, ./assets/hero-residencial-v2.jpg 1600w"
              sizes="(min-width: 62rem) 52vw, 100vw"
              width="1600" height="914" fetchpriority="high" decoding="async"
-             alt="Dois eletricistas da Power Pro, de uniforme da empresa, atendendo um quadro de medidores na entrada de um prédio residencial"
+             alt="Dois eletricistas da Power Pro, de uniforme da empresa, atendendo um quadro de medidores na entrada de um prédio residencial">
       </picture>
       <p class="hero-local">Atendimento rápido · Segunda a sexta, 8h às 18h</p>
     </div>
@@ -666,7 +655,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="lead">É mais comum do que parece, e na maioria das vezes tem solução simples e rápida, quando resolvida por quem entende do assunto.</p>
 
         <p class="cta-wrap">
-          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20resolver%20um%20problema%20el%C3%A9trico%20na%20minha%20casa%20agora.">
+          <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20resolver%20um%20problema%20el%C3%A9trico%20na%20minha%20casa%20agora.">
             <span>Quero resolver isso agora</span>
             <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
               <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -711,7 +700,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="lead">Diagnóstico claro, resolução rápida e um eletricista que realmente aparece no horário combinado, sem deixar você esperando.</p>
 
         <p class="cta-wrap">
-          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20seguran%C3%A7a%20el%C3%A9trica%20na%20minha%20casa%20hoje.">
+          <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20seguran%C3%A7a%20el%C3%A9trica%20na%20minha%20casa%20hoje.">
             <span>Quero segurança na minha casa hoje</span>
             <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
               <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -753,13 +742,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Por Que Famílias da Região Chamam a Power Pro</h2>
 
-    <ul class="lista">
-      <li><strong>Combinado é combinado:</strong> o horário marcado é o horário que a equipe chega.</li>
-      <li><strong>Diagnóstico antes do orçamento:</strong> você sabe exatamente o que está pagando e por quê.</li>
-      <li><strong>Equipe especializada:</strong> são eletricistas profissionais, não faz-tudo avulso.</li>
-      <li><strong>Atendimento ágil:</strong> resposta rápida direto pelo WhatsApp.</li>
-      <li><strong>Tradição:</strong> 11 anos de mercado e nota 5 estrelas no Google.</li>
-    </ul>
+    <div class="duplo">
+      <div>
+        <h3>Combinado é combinado</h3>
+        <p>O horário marcado é o horário que a equipe chega.</p>
+      </div>
+      <div>
+        <h3>Diagnóstico antes do orçamento</h3>
+        <p>Você sabe exatamente o que está pagando e por quê.</p>
+      </div>
+      <div>
+        <h3>Equipe especializada</h3>
+        <p>São eletricistas profissionais, não faz-tudo avulso.</p>
+      </div>
+      <div>
+        <h3>Atendimento ágil</h3>
+        <p>Resposta rápida direto pelo WhatsApp.</p>
+      </div>
+      <div>
+        <h3>Tradição</h3>
+        <p>11 anos de mercado e nota 5 estrelas no Google.</p>
+      </div>
+    </div>
 
     <!-- Os três selos vêm prontos da Power Pro. A copy manda usar exatamente
          este texto, sem alteração. -->
@@ -770,8 +774,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20como%20a%20Power%20Pro%20pode%20me%20ajudar.">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20como%20a%20Power%20Pro%20pode%20me%20ajudar.">
         Ver como podemos ajudar
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -792,8 +797,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20N%C3%A3o%20achei%20o%20servi%C3%A7o%20que%20preciso%20na%20p%C3%A1gina.%20Podem%20me%20ajudar%3F">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20N%C3%A3o%20achei%20o%20servi%C3%A7o%20que%20preciso%20na%20p%C3%A1gina.%20Podem%20me%20ajudar%3F">
         Não achou o serviço que precisa? Fale com a gente
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -804,16 +810,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>O que a maioria promete. O que a Power Pro cumpre.</h2>
 
-    <ul class="lista">
-      <li><strong>Pontualidade real:</strong> chegamos no horário combinado, não em algum momento do dia.</li>
-      <li><strong>Transparência:</strong> diagnóstico prévio antes do orçamento fechado, sem surpresa na hora de pagar.</li>
-      <li><strong>Compromisso:</strong> o serviço é executado até o fim, sem sumiço no meio do trabalho.</li>
-      <li><strong>Equipe qualificada:</strong> técnico especializado, não ajudante sem formação.</li>
-    </ul>
+    <div class="duplo">
+      <div>
+        <h3>Pontualidade real</h3>
+        <p>Chegamos no horário combinado, não em algum momento do dia.</p>
+      </div>
+      <div>
+        <h3>Transparência</h3>
+        <p>Diagnóstico prévio antes do orçamento fechado, sem surpresa na hora de pagar.</p>
+      </div>
+      <div>
+        <h3>Compromisso</h3>
+        <p>O serviço é executado até o fim, sem sumiço no meio do trabalho.</p>
+      </div>
+      <div>
+        <h3>Equipe qualificada</h3>
+        <p>Técnico especializado, não ajudante sem formação.</p>
+      </div>
+    </div>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20atendimento%20que%20n%C3%A3o%20vai%20me%20deixar%20na%20m%C3%A3o.">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20atendimento%20que%20n%C3%A3o%20vai%20me%20deixar%20na%20m%C3%A3o.">
         Quero um atendimento que não vai me deixar na mão
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -844,8 +863,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </dl>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20conhecer%20a%20equipe%20da%20Power%20Pro.">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20conhecer%20a%20equipe%20da%20Power%20Pro.">
         Conhecer a equipe Power Pro
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -856,24 +876,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Nota 5 estrelas no Google. Quem já chamou, aprova.</h2>
 
-    <div class="grid tres">
-      <!-- A Adriana responde direto à objeção mais comum deste público, que é o
-           profissional que não aparece. A copy pede este card em destaque. -->
-      <div class="card principal">
+    <div class="vozes">
+      <!-- A Adriana vem primeiro porque responde direto à objeção mais comum
+           deste público, que é o profissional que não aparece. A ordem faz o
+           destaque; a moldura mais clara que ela tinha antes sugeria
+           depoimento pago. -->
+      <figure>
         <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
         <blockquote>"Excelentes profissionais. Vieram no dia e horário marcados, fizeram o serviço que ficou ótimo. Recomendo."</blockquote>
-        <p class="autor">Adriana Passos Cabral</p>
-      </div>
-      <div class="card">
+        <figcaption>Adriana Passos Cabral</figcaption>
+      </figure>
+      <figure>
         <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
         <blockquote>"Ótimo profissional, serviço realizado com muito capricho. Preço justo e muito atencioso para tirar todas as dúvidas. Super indico."</blockquote>
-        <p class="autor">Kellin Francine</p>
-      </div>
-      <div class="card">
+        <figcaption>Kellin Francine</figcaption>
+      </figure>
+      <figure>
         <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
         <blockquote>"Excelente profissional, usou apenas materiais de qualidade e tirou todas as minhas dúvidas."</blockquote>
-        <p class="autor">Brahian Guedes</p>
-      </div>
+        <figcaption>Brahian Guedes</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -883,17 +905,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Do contato à solução, sem enrolação</h2>
 
-    <div class="grid tres">
-      <div class="card"><span class="num">1</span><p>Você chama no WhatsApp e explica o que está acontecendo.</p></div>
-      <div class="card"><span class="num">2</span><p>Agendamos a visita técnica o quanto antes.</p></div>
-      <div class="card"><span class="num">3</span><p>Diagnóstico no local e orçamento claro, antes de qualquer execução.</p></div>
-      <div class="card"><span class="num">4</span><p>Executamos o reparo com equipe técnica especializada.</p></div>
-      <div class="card"><span class="num">5</span><p>Sua casa segura, com explicação simples do que foi feito.</p></div>
+    <div class="circuitos passos">
+      <div><span>Você chama no WhatsApp e explica o que está acontecendo.</span></div>
+      <div><span>Agendamos a visita técnica o quanto antes.</span></div>
+      <div><span>Diagnóstico no local e orçamento claro, antes de qualquer execução.</span></div>
+      <div><span>Executamos o reparo com equipe técnica especializada.</span></div>
+      <div><span>Sua casa segura, com explicação simples do que foi feito.</span></div>
     </div>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20iniciar%20o%20atendimento.">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20iniciar%20o%20atendimento.">
         Iniciar atendimento agora
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -918,8 +941,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Tenho%20d%C3%BAvidas%20sobre%20o%20atendimento%20residencial.">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Tenho%20d%C3%BAvidas%20sobre%20o%20atendimento%20residencial.">
         Tirar minhas dúvidas agora
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -928,16 +952,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 11 · Garantia ═══════════════════════════════════ -->
 <section>
   <div class="wrap">
-    <div class="destaque-bloco">
-      <h2>Serviço com Garantia Formal</h2>
-      <p class="lead">Elétrica residencial não é lugar para "depois eu vejo". Todo serviço da Power Pro é formalizado, com prazo de garantia definido conforme o tipo de trabalho executado.</p>
+    <!-- A caixa arredondada com borda laranja que envolvia este bloco saiu. Ela
+         era a única seção emoldurada da página, e a moldura não dizia nada que
+         o título já não dissesse. -->
+    <h2>Serviço com Garantia Formal</h2>
+    <p class="lead">Elétrica residencial não é lugar para "depois eu vejo". Todo serviço da Power Pro é formalizado, com prazo de garantia definido conforme o tipo de trabalho executado.</p>
 
-      <p class="cta-wrap">
-        <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20a%20garantia%20do%20servi%C3%A7o.">
-          Saber mais sobre a garantia
-        </a>
-      </p>
-    </div>
+    <p class="cta-wrap">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20a%20garantia%20do%20servi%C3%A7o.">
+        Saber mais sobre a garantia
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
+      </a>
+    </p>
   </div>
 </section>
 
@@ -968,8 +994,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </details>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Ainda%20tenho%20d%C3%BAvidas%20sobre%20o%20atendimento.">
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Ainda%20tenho%20d%C3%BAvidas%20sobre%20o%20atendimento.">
         Ainda com dúvidas? Fale com a gente
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
@@ -983,7 +1010,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <p class="cta-wrap">
       <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20residencial.">
-        Chamar no WhatsApp agora
+        <span class="rotulo-cta">Chamar no WhatsApp agora</span>
+        <span class="disco">
+          <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </span>
       </a>
     </p>
   </div>
@@ -1004,7 +1035,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ Barra fixa ════════════════════════════════════════════ -->
 <div class="barra">
   <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
-    Fale com um especialista
+    <span class="rotulo-cta">Fale com um especialista</span>
+    <span class="disco">
+      <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+      <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+    </span>
   </a>
 </div>
 
