@@ -33,7 +33,7 @@
       --text-muted:  #8d8781;
       --line:        rgb(255 255 255 / 11%);
       --line-soft:   rgb(255 255 255 / 6%);
-      --content:     1140px;
+      --content:     1360px;
       --radius:      14px;
       --radius-sm:   10px;
       /* Duas famílias, no mesmo molde da LP da Cia Athletica: sem webfont, sem
@@ -84,7 +84,7 @@
     h3 { font-size: 1.05rem; margin-bottom: 8px; }
 
     p { margin: 0 0 16px; color: var(--text-soft); }
-    p.lead { font-size: clamp(1rem, 2.1vw, 1.15rem); color: var(--text-soft); max-width: 62ch; }
+    p.lead { font-size: clamp(1rem, 2.1vw, 1.15rem); color: var(--text-soft); max-width: 74ch; }
 
     strong { color: var(--text); font-weight: 700; }
 
@@ -160,7 +160,7 @@
     @media (min-width: 62rem) {
       .hero-texto {
         padding: 56px clamp(32px, 4.4vw, 68px) 56px
-                 max(20px, calc((100vw - var(--content)) / 2));
+                 clamp(32px, calc((100vw - var(--content)) / 2), 96px);
         min-height: 33rem;
       }
     }
@@ -191,7 +191,7 @@
     .hero h1 { margin-bottom: 20px; font-size: clamp(2rem, 4.6vw, 3.15rem); }
     .hero h1 em { font-style: normal; color: var(--brand); }
 
-    .hero .lead { max-width: 34rem; margin-bottom: 30px; }
+    .hero .lead { max-width: 42rem; margin-bottom: 30px; }
 
     /* No celular as três credenciais empilham, sem separador: com o ponto,
        o item que quebrava levava o separador órfão para o início da linha.

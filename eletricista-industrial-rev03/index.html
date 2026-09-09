@@ -50,7 +50,7 @@
       --text-mute:  #8b857e;
       --rule:       rgb(255 255 255 / 12%);
       --rule-soft:  rgb(255 255 255 / 6%);
-      --content:    1180px;
+      --content:    1360px;
       --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
@@ -100,7 +100,7 @@
       line-height: 1.12;
       letter-spacing: -0.026em;
       text-wrap: balance;
-      max-width: 24ch;
+      max-width: 30ch;
     }
     h3 {
       margin: 0 0 6px;
@@ -108,7 +108,7 @@
       letter-spacing: -0.012em; color: var(--text);
     }
 
-    p { margin: 0 0 16px; color: var(--text-soft); max-width: 60ch; }
+    p { margin: 0 0 16px; color: var(--text-soft); max-width: 72ch; }
     p:last-child { margin-bottom: 0; }
     .lead { font-size: 1.16rem; font-weight: 300; line-height: 1.6; color: var(--text-soft); }
 
@@ -195,7 +195,7 @@
     @media (min-width: 62rem) {
       .capa-texto {
         padding: 56px clamp(40px, 4.6vw, 76px) 56px
-                 max(24px, calc((100vw - var(--content)) / 2));
+                 clamp(32px, calc((100vw - var(--content)) / 2), 96px);
       }
     }
 
@@ -219,7 +219,7 @@
     }
 
     .capa h1 em { font-style: normal; color: var(--accent); }
-    .capa .lead { max-width: 34rem; }
+    .capa .lead { max-width: 44rem; }
 
     .capa-creds {
       display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 30px 0 0;
