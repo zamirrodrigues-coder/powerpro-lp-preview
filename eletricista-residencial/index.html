@@ -42,12 +42,16 @@
          rolagem, sem hierarquia entre o que fecha um assunto e o que separa
          dois. */
       --v1: 8px;  --v2: 16px; --v3: 24px; --v4: 32px; --v6: 48px; --v8: 64px; --v12: 96px;
-      /* Duas famílias, no mesmo molde da LP da Cia Athletica: sem webfont, sem
-         custo de carregamento numa página de mídia paga. A condensada no corpo
-         e a preta no display dão o peso industrial que a stack de sistema não
-         tem, e encurtam o H1, que quebrava em quatro linhas no celular. */
-      --font-text:  "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
-      --font-title: "Arial Black", "Helvetica Neue", Impact, Arial, sans-serif;
+      /* Sem webfont, sem custo de carregamento numa página de mídia paga.
+
+         O SERIF nos títulos é o que separa esta página da industrial sem sair
+         do fundo escuro. Quem chega aqui é uma família com cheiro de queimado
+         em casa, não um gestor com a produção parada: o Arial Black que estava
+         aqui é a voz do chão de fábrica, e a industrial já fala com ela.
+         Georgia está instalada em Windows, macOS e iOS; o Noto Serif cobre
+         Android. */
+      --font-text:  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-title: Georgia, "Times New Roman", "Noto Serif", serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -84,13 +88,17 @@
        de marketing na tela de quem esta com a producao parada. Os H2 da copy
        sustentam a pagina sem rotulo. */
 
+    /* O serif pede tratamento oposto ao do display pesado que estava aqui:
+       peso 700 em vez de 900 e entreletra normal em vez de negativa. Apertar
+       serif fecha o desenho da letra e ele perde justamente a legibilidade
+       que motivou a escolha. */
     h1, h2, h3 {
       font-family: var(--font-title);
-      line-height: 1.1; margin: 0 0 16px; font-weight: 900; letter-spacing: -.015em;
+      line-height: 1.15; margin: 0 0 var(--v2); font-weight: 700; letter-spacing: 0;
     }
-    h1 { font-size: clamp(1.75rem, 5.2vw, 3rem); }
-    h2 { font-size: clamp(1.4rem, 3.6vw, 2.1rem); }
-    h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    h1 { font-size: clamp(1.9rem, 5vw, 3.1rem); line-height: 1.08; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); max-width: 26ch; }
+    h3 { font-size: 1.08rem; margin-bottom: var(--v1); }
 
     p { margin: 0 0 16px; color: var(--text-soft); }
     p.lead { font-size: clamp(1rem, 2.1vw, 1.15rem); color: var(--text-soft); max-width: 74ch; }
@@ -347,8 +355,8 @@
     .situacoes > div:first-child { padding-top: 0; }
     .situacoes > div:last-child { border-bottom: 0; padding-bottom: 0; }
     .situacoes h3 {
-      font-family: var(--font-title); font-size: 1.22rem; font-weight: 900;
-      letter-spacing: -.015em; color: var(--text); margin: 0 0 6px;
+      font-family: var(--font-title); font-size: 1.24rem; font-weight: 700;
+      letter-spacing: 0; color: var(--text); margin: 0 0 6px;
     }
     .situacoes p { margin: 0; color: var(--text-soft); max-width: 42ch; }
 
@@ -364,47 +372,86 @@
     }
     .assinatura span { display: block; color: rgb(141 135 129 / 78%); }
 
-    /* ── Blocos de conteúdo ──────────────────────────────────────
-       Duas colunas de itens, cada um aberto por um filete. Substitui a
-       `lista`, que punha cada item numa caixa escura com marcador quadrado
-       laranja: nove caixas iguais em dois blocos seguidos, o vocabulário que
-       o Zamir chamou de designer de IA. O filete diz a mesma coisa (aqui
-       começa outro item) sem desenhar um objeto que não existe. */
-    .duplo { display: grid; gap: 0 var(--v12); margin-top: var(--v6); }
-    @media (min-width: 56rem) { .duplo { grid-template-columns: 1fr 1fr; } }
-    .duplo > div { padding: 22px 0; border-top: 1px solid var(--line-soft); }
-    .duplo p { margin: 0; max-width: 42ch; }
+    /* ═══ VOCABULÁRIO PRÓPRIO DA RESIDENCIAL ══════════════════════
+       O que esta página compartilha com a industrial é o que o Zamir pediu
+       que fosse igual: o botão e a ausência de caixa. O resto tem de falar
+       com outra pessoa. Lá é um gestor com a produção parada, que decide por
+       documentação e contrato; aqui é uma família com cheiro de queimado em
+       casa, que decide por confiança. Os blocos abaixo não existem na
+       industrial, e os dela não existem aqui. */
 
-    /* ── Régua de circuitos ────────────────────────────────────
-       A assinatura da página, e a única peça que se permite ser
-       memorável. Os serviços não são bullets: são as linhas de um
-       quadro de comando, identificadas de C01 em diante e penduradas
-       num barramento. Vem do objeto que o cliente monta todo dia.
-
-       CORREÇÃO 08/09: esta régua estava MORTA. O CSS mirava `li` e a marcação
-       da página usa `div`, então nenhuma das regras pegava e os cinco serviços
-       saíam como cinco linhas soltas, sem numeração e sem filete. Os seletores
-       abaixo são os da rev03, que casam com a marcação de verdade. */
-    .circuitos { margin: var(--v6) 0 0; counter-reset: c; }
-    .circuitos > div {
-      display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 16px;
-      align-items: baseline; padding: 15px 0;
+    /* ── Compromissos ────────────────────────────────────────────
+       Bloco 4. Não é grade de itens: cada linha traz o compromisso à
+       esquerda e o que ele significa à direita, como cláusula de um acordo.
+       O assunto do bloco é palavra dada ("combinado é combinado"), e a forma
+       diz isso melhor do que uma grade de blocos iguais. */
+    .compromissos { margin: var(--v6) 0 0; }
+    .compromissos > div {
+      display: grid; gap: 4px var(--v8); padding: var(--v3) 0;
       border-top: 1px solid var(--line-soft);
     }
-    .circuitos > div:last-child { border-bottom: 1px solid var(--line-soft); }
-    .circuitos > div::before {
-      content: "C" counter(c, decimal-leading-zero); counter-increment: c;
-      font-variant-numeric: tabular-nums; font-size: .76rem;
-      font-weight: 700; letter-spacing: .07em; color: var(--brand);
+    .compromissos > div:last-child { border-bottom: 1px solid var(--line-soft); }
+    @media (min-width: 52rem) {
+      .compromissos > div { grid-template-columns: minmax(0, 16rem) minmax(0, 1fr); align-items: baseline; }
     }
-    .circuitos span { color: var(--text-soft); }
-    @media (min-width: 62rem) { .circuitos { columns: 2; column-gap: 4rem; } .circuitos > div { break-inside: avoid; } }
+    .compromissos h3 { margin: 0; font-size: 1.24rem; color: var(--text); }
+    .compromissos p { margin: 0; max-width: 52ch; }
 
-    /* O roteiro de atendimento usa a mesma régua, numerada de 1 a 5 em vez de
-       C01: são passos em ordem, não frentes distintas. Antes eram cinco cards
-       com o número num quadrado laranja. */
-    .circuitos.passos > div::before { content: counter(c); counter-increment: c; }
-    @media (min-width: 62rem) { .circuitos.passos { columns: 1; } }
+    /* ── Serviços da casa ────────────────────────────────────────
+       Bloco 5. A régua "C01, C02" saiu daqui. Aquilo é nomenclatura de
+       quadro de comando, o objeto do eletricista INDUSTRIAL: quem lê esta
+       página quer saber se o problema da casa dela está na lista, não em que
+       circuito ele fica. O traço curto à esquerda é o mesmo da faixa da
+       abertura, que já é vocabulário só desta página. */
+    .servicos { margin: var(--v6) 0 0; display: grid; gap: 0; }
+    @media (min-width: 52rem) { .servicos { grid-template-columns: 1fr 1fr; column-gap: var(--v8); } }
+    .servicos > div {
+      display: flex; align-items: baseline; gap: 16px;
+      padding: 16px 0; border-top: 1px solid var(--line-soft);
+      color: var(--text-soft);
+    }
+    .servicos > div::before {
+      content: ""; flex: 0 0 auto; width: 22px; height: 2px;
+      background: var(--brand); transform: translateY(-.35em);
+    }
+
+    /* ── Contraste ───────────────────────────────────────────────
+       Bloco 6. O título contrapõe o que se promete e o que se cumpre, então
+       o bloco é prosa: a afirmação abre e a explicação segue logo abaixo,
+       fluindo em duas colunas. Diferente dos compromissos, que são linhas de
+       acordo com filete entre elas. */
+    .contraste { margin: var(--v6) 0 0; }
+    @media (min-width: 52rem) { .contraste { columns: 2; column-gap: var(--v12); } }
+    .contraste p { margin: 0 0 var(--v4); max-width: 46ch; break-inside: avoid; }
+    .contraste strong {
+      display: block; margin-bottom: 3px;
+      font-family: var(--font-title); font-weight: 700;
+      font-size: 1.18rem; color: var(--text);
+    }
+
+    /* ── Roteiro ─────────────────────────────────────────────────
+       Bloco 9. Cinco passos em ordem, numerados e ligados por um fio: é um
+       caminho a percorrer, não um quadro de circuitos. O número vem em serif
+       no corpo do texto, em vez de dentro de um quadrado laranja. */
+    .roteiro { margin: var(--v6) 0 0; counter-reset: p; }
+    .roteiro > div {
+      position: relative; counter-increment: p;
+      display: grid; grid-template-columns: 2.6rem 1fr; gap: 0 var(--v3);
+      padding-bottom: var(--v6);
+    }
+    .roteiro > div:last-child { padding-bottom: 0; }
+    .roteiro > div::before {
+      content: counter(p);
+      font-family: var(--font-title); font-size: 1.5rem; font-weight: 700;
+      color: var(--brand); line-height: 1;
+    }
+    /* o fio que liga um passo ao seguinte */
+    .roteiro > div::after {
+      content: ""; position: absolute; left: .58rem; top: 2rem; bottom: 10px;
+      width: 1px; background: var(--line);
+    }
+    .roteiro > div:last-child::after { display: none; }
+    .roteiro span { color: var(--text-soft); padding-top: 4px; max-width: 56ch; }
 
     /* ── Ficha de dados ────────────────────────────────────────
        O bloco de autoridade traz FATOS institucionais, não
@@ -417,23 +464,32 @@
       padding: 14px 0; border-bottom: 1px solid var(--line-soft);
     }
     .dados dt {
-      font-family: var(--font-title); font-size: .7rem;
-      letter-spacing: .12em; text-transform: uppercase;
+      font-family: var(--font-text); font-size: .72rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
       color: var(--text-muted); padding-top: 3px;
     }
     .dados dd { margin: 0; color: var(--text-soft); }
 
-    /* ── Depoimentos ─────────────────────────────────────────────
-       Três avaliações reais do Google. Cada uma abre com um filete, em vez
-       de morar numa caixa de fundo próprio, e o card em destaque saiu: a
-       moldura mais clara sugeria depoimento patrocinado, e a ordem já põe
-       primeiro o que responde à objeção mais comum deste público. */
-    .vozes { display: grid; gap: 0; margin-top: var(--v6); }
-    @media (min-width: 62rem) { .vozes { grid-template-columns: repeat(3, 1fr); gap: 0 var(--v6); } }
-    .vozes figure { margin: 0; padding: 26px 0; border-top: 1px solid var(--line-soft); }
-    .vozes blockquote { margin: 0 0 14px; color: var(--text-soft); font-style: normal; }
-    .vozes figcaption { font-weight: 700; font-size: .93rem; color: var(--text); }
-    .estrelas { color: var(--accent); font-size: .95rem; letter-spacing: .2em; margin: 0 0 10px; }
+    /* ── Falas ───────────────────────────────────────────────────
+       Bloco 8. A industrial põe as três avaliações lado a lado, em colunas
+       iguais e corpo pequeno: lá elas são credencial. Aqui elas são leitura.
+       Uma embaixo da outra, a fala em serif e em corpo maior, porque é
+       vizinho falando de vizinho e o texto é o que convence.
+
+       O card em destaque saiu: a moldura mais clara sugeria depoimento pago,
+       e a ordem já põe primeiro quem responde à objeção mais comum daqui,
+       que é o profissional não aparecer. */
+    .falas { margin: var(--v6) 0 0; }
+    .falas figure { margin: 0; padding: var(--v6) 0; border-top: 1px solid var(--line-soft); }
+    .falas figure:last-of-type { border-bottom: 1px solid var(--line-soft); }
+    .falas blockquote {
+      margin: 0 0 var(--v3); font-style: normal;
+      font-family: var(--font-title); font-weight: 400;
+      font-size: clamp(1.12rem, 2.1vw, 1.4rem); line-height: 1.5;
+      color: var(--text); max-width: 58ch;
+    }
+    .falas figcaption { font-size: .95rem; font-weight: 600; color: var(--text-soft); }
+    .estrelas { color: var(--accent); font-size: .9rem; letter-spacing: .2em; margin: 0 0 var(--v2); }
 
     /* ── Objeções ──────────────────────────────────────────── */
     .objecao { margin: 0 0 26px; max-width: 58ch; }
@@ -742,7 +798,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Por Que Famílias da Região Chamam a Power Pro</h2>
 
-    <div class="duplo">
+    <div class="compromissos">
       <div>
         <h3>Combinado é combinado</h3>
         <p>O horário marcado é o horário que a equipe chega.</p>
@@ -788,7 +844,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2>Serviços de Elétrica Residencial</h2>
     <p class="lead">Serviços elétricos completos para residências, comércios e indústrias.</p>
 
-    <div class="circuitos">
+    <div class="servicos">
       <div><span>Projetos elétricos e laudos técnicos (predial, residencial e industrial)</span></div>
       <div><span>Montagem de quadros elétricos e de comando</span></div>
       <div><span>Cabeamento estruturado, padrão de entrada, telefonia e internet</span></div>
@@ -810,23 +866,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>O que a maioria promete. O que a Power Pro cumpre.</h2>
 
-    <div class="duplo">
-      <div>
-        <h3>Pontualidade real</h3>
-        <p>Chegamos no horário combinado, não em algum momento do dia.</p>
-      </div>
-      <div>
-        <h3>Transparência</h3>
-        <p>Diagnóstico prévio antes do orçamento fechado, sem surpresa na hora de pagar.</p>
-      </div>
-      <div>
-        <h3>Compromisso</h3>
-        <p>O serviço é executado até o fim, sem sumiço no meio do trabalho.</p>
-      </div>
-      <div>
-        <h3>Equipe qualificada</h3>
-        <p>Técnico especializado, não ajudante sem formação.</p>
-      </div>
+    <div class="contraste">
+      <p><strong>Pontualidade real</strong>Chegamos no horário combinado, não em algum momento do dia.</p>
+      <p><strong>Transparência</strong>Diagnóstico prévio antes do orçamento fechado, sem surpresa na hora de pagar.</p>
+      <p><strong>Compromisso</strong>O serviço é executado até o fim, sem sumiço no meio do trabalho.</p>
+      <p><strong>Equipe qualificada</strong>Técnico especializado, não ajudante sem formação.</p>
     </div>
 
     <p class="cta-wrap">
@@ -876,7 +920,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Nota 5 estrelas no Google. Quem já chamou, aprova.</h2>
 
-    <div class="vozes">
+    <div class="falas">
       <!-- A Adriana vem primeiro porque responde direto à objeção mais comum
            deste público, que é o profissional que não aparece. A ordem faz o
            destaque; a moldura mais clara que ela tinha antes sugeria
@@ -905,7 +949,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Do contato à solução, sem enrolação</h2>
 
-    <div class="circuitos passos">
+    <div class="roteiro">
       <div><span>Você chama no WhatsApp e explica o que está acontecendo.</span></div>
       <div><span>Agendamos a visita técnica o quanto antes.</span></div>
       <div><span>Diagnóstico no local e orçamento claro, antes de qualquer execução.</span></div>
