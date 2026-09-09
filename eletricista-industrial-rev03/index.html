@@ -211,12 +211,18 @@
        e piso vazios, nunca do lado direito, onde estao os tecnicos e o quadro.
        Trocar por uma porcentagem faz o corte voltar a comer a direita quando a
        coluna fica estreita. */
-    .capa-foto img { width: 100%; height: 100%; object-fit: cover; object-position: right center; }
-    /* Véu leve e só na foto: com o texto fora dela, o que a imagem precisa é de
-       um assentamento para não brigar de brilho com a coluna escura ao lado. */
-    .capa-foto::after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(90deg, rgb(13 13 13 / 55%) 0%, rgb(13 13 13 / 8%) 26%, rgb(13 13 13 / 0%) 60%);
+    .capa-foto img {
+      width: 100%; height: 100%; object-fit: cover;
+      /* Ancorada quase na direita, mas não colada: 92% traz de volta um palmo do
+         corredor e faz a transição cair na altura do cotovelo do técnico, que é
+         uma região limpa da imagem, em vez de cortar o corpo dele no meio. */
+      object-position: 92% center;
+      /* A borda esquerda se dissolve no preto em vez de terminar num corte reto,
+         mesmo tratamento da rev01. A máscara vai até 22%, mais longa que os 13%
+         de lá, porque aqui a coluna é mais larga e a transição precisa de mais
+         percurso para não virar uma faixa cinza evidente. */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%);
+              mask-image: linear-gradient(to right, transparent 0%, #000 22%);
     }
 
     /* O `margin-bottom: auto` que havia aqui era do layout centralizado antigo:
