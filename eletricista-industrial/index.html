@@ -218,7 +218,12 @@
          comando aparece inteiro à direita, o logo nas costas do técnico fica
          legível, e sobra pouco do corredor vazio da esquerda, que é justamente
          a parte que a máscara dissolve no preto. */
-      object-position: 62% center;
+      /* Ancorada na DIREITA: com object-fit cover a imagem e sempre cortada, e
+         ancorar aqui garante que o corte aconteca do lado esquerdo, que e muro
+         e piso vazios, nunca do lado direito, onde estao os tecnicos e o quadro.
+         Trocar por uma porcentagem faz o corte voltar a comer a direita quando a
+         coluna fica estreita. */
+      object-position: right center;
     }
     @media (min-width: 62rem) {
       .hero-foto { min-height: 100%; }

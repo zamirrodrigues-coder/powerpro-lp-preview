@@ -206,7 +206,12 @@
 
     .capa-foto { position: relative; min-height: 16rem; }
     .capa-foto picture { display: block; width: 100%; height: 100%; }
-    .capa-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 58% center; }
+    /* Ancorada na DIREITA: com object-fit cover a imagem e sempre cortada, e
+       ancorar aqui garante que o corte aconteca do lado esquerdo, que e muro
+       e piso vazios, nunca do lado direito, onde estao os tecnicos e o quadro.
+       Trocar por uma porcentagem faz o corte voltar a comer a direita quando a
+       coluna fica estreita. */
+    .capa-foto img { width: 100%; height: 100%; object-fit: cover; object-position: right center; }
     /* Véu leve e só na foto: com o texto fora dela, o que a imagem precisa é de
        um assentamento para não brigar de brilho com a coluna escura ao lado. */
     .capa-foto::after {
