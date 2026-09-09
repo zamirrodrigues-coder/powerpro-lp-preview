@@ -50,7 +50,13 @@
       --text-mute:  #8b857e;
       --rule:       rgb(255 255 255 / 12%);
       --rule-soft:  rgb(255 255 255 / 6%);
-      --content:    1360px;
+      --content:    1600px;
+      --gutter:     clamp(24px, 3.2vw, 48px);
+      /* A margem da borda da tela. Hero e seções nascem daqui, e é isso que
+         mantém um eixo vertical único ao rolar a página. */
+      --borda:      max(var(--gutter), calc((100vw - var(--content)) / 2 + var(--gutter)));
+      /* Ritmo vertical: uma base e seus múltiplos, em vez de valores avulsos. */
+      --v1: 8px;  --v2: 16px; --v3: 24px; --v4: 32px; --v6: 48px; --v8: 64px; --v12: 96px;
       --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
@@ -76,9 +82,9 @@
        não quebra o modal, que é filho independente do body. */
     #whatsapp-button { display: none !important; }
 
-    .wrap { width: 100%; max-width: var(--content); margin: 0 auto; padding: 0 24px; }
+    .wrap { width: 100%; max-width: var(--content); margin: 0 auto; padding-inline: var(--gutter); }
 
-    section { padding: 84px 0; }
+    section { padding-block: var(--v12); }
     section + section { border-top: 1px solid var(--rule-soft); }
 
     /* ── Tipografia ────────────────────────────────────────────
@@ -86,7 +92,7 @@
        leading apertado. O corpo fica no oposto: peso normal,
        tracking zero, leading folgado. */
     h1 {
-      margin: 0 0 26px;
+      margin: 0 0 var(--v4);
       font-size: clamp(2.4rem, 6.6vw, 5.2rem);
       font-weight: 400;
       line-height: 1.02;
@@ -114,7 +120,7 @@
 
     .rotulo {
       font-size: .74rem; font-weight: 600; letter-spacing: .17em;
-      text-transform: uppercase; color: var(--brand); margin: 0 0 18px;
+      text-transform: uppercase; color: var(--brand); margin: 0 0 var(--v3);
     }
 
     strong { color: var(--text); font-weight: 600; }
@@ -165,7 +171,7 @@
     .cta-texto:hover svg { transform: translateX(4px); }
     .cta-texto:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 
-    .acao { margin-top: 34px; }
+    .acao { margin-top: var(--v6); }
 
 
     /* ── Abertura em tela cheia ────────────────────────────────── */
@@ -194,8 +200,7 @@
     }
     @media (min-width: 62rem) {
       .capa-texto {
-        padding: 56px clamp(40px, 4.6vw, 76px) 56px
-                 clamp(32px, calc((100vw - var(--content)) / 2), 96px);
+        padding: var(--v8) var(--v8) var(--v8) var(--borda);
       }
     }
 
@@ -209,7 +214,10 @@
       background: linear-gradient(90deg, rgb(13 13 13 / 55%) 0%, rgb(13 13 13 / 8%) 26%, rgb(13 13 13 / 0%) 60%);
     }
 
-    .marca { margin: 0 0 auto; padding-bottom: 52px; }
+    /* O `margin-bottom: auto` que havia aqui era do layout centralizado antigo:
+       ele prendia o logo no topo e abria um vazio de mais de 200px em tela alta.
+       Agora a marca é o primeiro item do bloco, com respiro proporcional. */
+    .marca { margin: 0 0 var(--v8); }
     .marca b { font-size: 1.4rem; font-weight: 800; letter-spacing: -.022em; line-height: 1; }
     .marca b i { font-style: normal; color: var(--brand); }
     .marca em {
@@ -222,7 +230,7 @@
     .capa .lead { max-width: 44rem; }
 
     .capa-creds {
-      display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 30px 0 0;
+      display: flex; flex-wrap: wrap; gap: var(--v1) var(--v3); margin: var(--v6) 0 0;
       font-size: .86rem; color: var(--text-mute); max-width: none;
     }
     .capa-creds span { white-space: nowrap; }
@@ -242,13 +250,13 @@
 
     /* ── Blocos de conteúdo ────────────────────────────────────── */
     .duas { display: grid; gap: 40px; }
-    @media (min-width: 62rem) { .duas { grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; } }
+    @media (min-width: 62rem) { .duas { grid-template-columns: 1fr 1fr; gap: var(--v12); align-items: start; } }
 
     .pontos > div { padding: 22px 0; border-top: 1px solid var(--rule-soft); }
     .pontos > div:first-child { padding-top: 0; border-top: 0; }
     .pontos p { margin: 0; max-width: 44ch; }
 
-    .duplo { display: grid; gap: 0 56px; margin-top: 34px; }
+    .duplo { display: grid; gap: 0 var(--v12); margin-top: var(--v6); }
     @media (min-width: 56rem) { .duplo { grid-template-columns: 1fr 1fr; } }
     .duplo > div { padding: 22px 0; border-top: 1px solid var(--rule-soft); }
     .duplo p { margin: 0; max-width: 42ch; }
@@ -279,7 +287,7 @@
 
     /* ── Depoimentos ───────────────────────────────────────────── */
     .vozes { display: grid; gap: 0; margin-top: 34px; }
-    @media (min-width: 62rem) { .vozes { grid-template-columns: repeat(3, 1fr); gap: 0 48px; } }
+    @media (min-width: 62rem) { .vozes { grid-template-columns: repeat(3, 1fr); gap: 0 var(--v6); } }
     .vozes figure { margin: 0; padding: 26px 0; border-top: 1px solid var(--rule-soft); }
     .vozes blockquote { margin: 0 0 14px; color: var(--text-soft); font-weight: 300; }
     .vozes figcaption { font-weight: 600; font-size: .93rem; }

@@ -33,7 +33,13 @@
       --text-muted:  #8d8781;
       --line:        rgb(255 255 255 / 11%);
       --line-soft:   rgb(255 255 255 / 6%);
-      --content:     1360px;
+      --content:     1600px;
+      --gutter:      clamp(20px, 3.2vw, 48px);
+      /* Margem da borda da tela. O hero e as seções nascem daqui, e é isso que
+         mantém um eixo vertical único ao rolar. Antes o hero tinha padding com
+         teto próprio e as seções um container centralizado: o texto pulava
+         quase 200px para a direita na primeira rolagem. */
+      --borda:       max(var(--gutter), calc((100vw - var(--content)) / 2 + var(--gutter)));
       --radius:      14px;
       --radius-sm:   10px;
       /* Duas famílias, no mesmo molde da LP da Cia Athletica: sem webfont, sem
@@ -65,7 +71,7 @@
        Esconder por CSS não quebra o modal, que é filho independente do body. */
     #whatsapp-button { display: none !important; }
 
-    .wrap { width: 100%; max-width: var(--content); margin: 0 auto; padding: 0 20px; }
+    .wrap { width: 100%; max-width: var(--content); margin: 0 auto; padding-inline: var(--gutter); }
 
     section { padding: 60px 0; border-bottom: 1px solid var(--line-soft); }
     section:last-of-type { border-bottom: 0; }
@@ -159,8 +165,7 @@
     }
     @media (min-width: 62rem) {
       .hero-texto {
-        padding: 56px clamp(32px, 4.4vw, 68px) 56px
-                 clamp(32px, calc((100vw - var(--content)) / 2), 96px);
+        padding: 56px clamp(32px, 4.4vw, 68px) 56px var(--borda);
         min-height: 33rem;
       }
     }
