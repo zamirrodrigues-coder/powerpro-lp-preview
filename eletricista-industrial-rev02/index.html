@@ -368,6 +368,13 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: 1ms !important; }
     }
+
+    /* Logotipo oficial da Power Pro, recebido em 08/09. Funciona direto sobre o
+       fundo escuro porque as letras já têm contorno claro no próprio desenho da
+       marca, então não precisou de versão negativa: cheguei a gerar uma, e ela
+       perdia os vazados internos das letras. */
+    .logo-marca { width: 186px; height: auto; }
+    @media (max-width: 46rem) { .logo-marca { width: 152px; } }
   </style>
 </head>
 <body>
@@ -381,7 +388,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="abertura">
   <div class="wrap">
     <!-- PENDENTE: trocar pelo logo oficial quando o arquivo chegar. -->
-    <p class="marca">Power<b>Pro</b><span>Soluções Elétricas</span></p>
+    <p class="marca">
+    <img class="logo-marca" src="./assets/logo-power-pro.png" alt="Power Pro Soluções Elétricas" width="400" height="113" decoding="async">
+  </p>
 
     <p class="rotulo credencial">11 anos de mercado &nbsp;·&nbsp; Emissão de RT (Termo de Responsabilidade Técnica)</p>
 
@@ -391,7 +400,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <p class="acao">
       <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20industrial%20e%20preciso%20de%20atendimento.">
-        Falar agora com um eletricista industrial
+        Fale com um especialista
       </a>
     </p>
 
@@ -743,7 +752,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ Barra flutuante ═══════════════════════════════════════ -->
 <div class="barra">
   <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20industrial%20e%20preciso%20de%20atendimento.">
-    Falar com um eletricista agora
+    Fale com um especialista
   </a>
 </div>
 

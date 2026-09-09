@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1a1a1a">
-  <meta name="description" content="Eletricista industrial em Novo Hamburgo e região metropolitana de Porto Alegre. Manutenção, instalação e adequação elétrica industrial com laudo técnico (RT), diagnóstico no local e garantia formal por contrato.">
-  <title>Eletricista Industrial em Novo Hamburgo e Região | Power Pro Soluções Elétricas</title>
+  <meta name="description" content="Eletricista residencial em Novo Hamburgo, Campo Bom, São Leopoldo, Porto Alegre e região. Disjuntor desarmando ou cheiro de queimado? Diagnóstico técnico no local, explicado em linguagem simples.">
+  <title>Eletricista Residencial em Novo Hamburgo e Região | Power Pro Soluções Elétricas</title>
 
   <!-- PENDENTE: favicon entra junto com o logo oficial do cliente.
        <link rel="icon" type="image/png" href="./assets/logo-power-pro.png"> -->
@@ -209,10 +209,9 @@
     .hero-foto { position: relative; min-height: 15rem; }
     .hero-foto img {
       width: 100%; height: 100%; object-fit: cover;
-      /* Enquadramento calibrado para a foto do uniforme: em 62% o painel de
-         comando aparece inteiro à direita, o logo nas costas do técnico fica
-         legível, e sobra pouco do corredor vazio da esquerda, que é justamente
-         a parte que a máscara dissolve no preto. */
+      /* Enquadra como no mockup: o quadro de comando entra pela esquerda e o
+         técnico fica à direita. Puxar mais para a direita cortava o painel,
+         que é o assunto da foto. */
       object-position: 62% center;
     }
     @media (min-width: 62rem) {
@@ -342,13 +341,6 @@
       color: var(--text-muted); line-height: 1.9;
     }
     .assinatura span { display: block; color: rgb(141 135 129 / 78%); }
-
-    /* Mesma linguagem das dobras duplas, mas em largura inteira e duas colunas,
-       para blocos que têm só título e uma lista de pontos, sem coluna de texto
-       ao lado. Evita a caixa com marcador que o resto da página abandonou. */
-    .situacoes.largo { display: grid; gap: 0 56px; }
-    @media (min-width: 56rem) { .situacoes.largo { grid-template-columns: 1fr 1fr; } }
-    .situacoes.largo > div:first-child { padding-top: 22px; }
 
     /* Ação em linha, como no mockup: sublinhado e seta, sem caixa. */
     .cta.linha {
@@ -517,6 +509,35 @@
       .cta:hover { transform: none; }
     }
 
+    /* ═══ ESPECÍFICO DA RESIDENCIAL ════════════════════════════
+       Microcopy do horário: a copy pede este aviso no hero e no FAQ,
+       de propósito. O anúncio fala em urgência no sentido de resposta
+       rápida, e sem esta linha quem clica fora do horário comercial
+       chega esperando plantão 24h. */
+    .microcopy {
+      margin: 14px 0 0; font-size: .88rem; color: var(--text-muted);
+    }
+
+    /* Os três selos vêm prontos da Power Pro e o texto deles não se
+       altera. Ficam juntos, separados do resto dos diferenciais. */
+    .selos {
+      display: grid; gap: 10px; margin-top: 26px;
+      padding-top: 24px; border-top: 1px solid var(--line);
+    }
+    @media (min-width: 46rem) { .selos { grid-template-columns: repeat(3, 1fr); } }
+    .selos span {
+      display: block; padding: 14px 16px;
+      border: 1px solid rgb(200 90 46 / 38%); border-radius: var(--radius-sm);
+      background: var(--brand-soft);
+      font-family: var(--font-title); font-size: .82rem; font-weight: 900;
+      letter-spacing: .04em; text-transform: uppercase; color: var(--accent);
+      text-align: center;
+    }
+
+    /* O depoimento da Adriana responde direto à objeção mais comum deste
+       público, que é o profissional que não aparece. A copy pede destaque. */
+    .card.principal { border-color: rgb(200 90 46 / 45%); background: #2b2320; }
+
     /* Logotipo oficial da Power Pro, recebido em 08/09. Funciona direto sobre o
        fundo escuro porque as letras já têm contorno claro no próprio desenho da
        marca, então não precisou de versão negativa: cheguei a gerar uma, e ela
@@ -524,7 +545,6 @@
     .logo-marca { width: 186px; height: auto; }
     @media (max-width: 46rem) { .logo-marca { width: 152px; } }
   </style>
-</head>
 <body>
 
 <!-- Google Tag Manager (noscript) -->
@@ -533,7 +553,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager -->
 
 <!-- ══ BLOCO 1 · Primeira dobra ══════════════════════════════ -->
-<!-- Réplica do mockup aprovado pelo Zamir em 07/09/2026. -->
+<!-- Mesmo formato da LP Industrial, aprovado nos mockups de 07/09. -->
 <header class="hero">
   <div class="hero-grade">
 
@@ -542,14 +562,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <img class="logo-marca" src="./assets/logo-power-pro.png" alt="Power Pro Soluções Elétricas" width="400" height="113" decoding="async">
   </p>
 
-      <p class="hero-linha">Eletricista Industrial · Novo Hamburgo e Região</p>
+      <p class="hero-linha">Eletricista Residencial · Novo Hamburgo e Região</p>
 
-      <h1>Eletricista industrial para quando sua operação <em>não pode parar.</em></h1>
+      <h1>Eletricista residencial em Novo Hamburgo <em>e região</em></h1>
 
-      <p class="lead">Manutenção, instalação e adequação elétrica industrial com diagnóstico técnico no local e documentação quando necessário.</p>
+      <p class="lead">Disjuntor desarmando, cheiro de queimado ou fumaça? Diagnóstico técnico no local, explicado em linguagem simples, com atendimento rápido em toda a região metropolitana.</p>
 
       <p class="cta-wrap">
-        <a class="cta destaque" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20industrial%20e%20preciso%20de%20atendimento.">
+        <a class="cta destaque" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
           <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/>
             <path fill="currentColor" d="M15.7 13.6c-.2-.1-1.3-.640-1.5-.71-.2-.08-.35-.11-.5.11-.14.22-.56.71-.69.86-.13.14-.25.16-.47.05-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.14-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38h-.42c-.15 0-.39.05-.59.28-.2.22-.77.76-.77 1.84s.79 2.13.9 2.28c.11.15 1.56 2.38 3.78 3.34.53.23.94.36 1.26.46.53.17 1.01.14 1.39.09.42-.06 1.3-.53 1.49-1.05.18-.51.18-.95.13-1.04-.05-.09-.2-.15-.42-.26z"/>
@@ -561,25 +581,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </a>
       </p>
 
+      <!-- A copy pede este aviso de propósito: o anúncio fala em urgência no
+           sentido de resposta rápida, e sem esta linha quem clica fora do
+           horário comercial chega esperando plantão 24h. -->
+      <p class="microcopy">Atendimento de segunda a sexta, das 8h às 18h, mediante agendamento.</p>
+
       <p class="hero-creds">
-        <span>Diagnóstico no local</span>
-        <span>RT quando necessário</span>
-        <span>Atendimento regional</span>
+        <span>Novo Hamburgo, Campo Bom, São Leopoldo, Porto Alegre e região</span>
+        <span>Resposta rápida por WhatsApp</span>
+        <span>Diagnóstico explicado com clareza</span>
       </p>
     </div>
 
     <div class="hero-foto">
+      <!-- PENDENTE: a copy pede foto de atendimento RESIDENCIAL (van em frente
+           a uma casa, ou técnico numa residência). Enquanto ela não chega, roda
+           a foto da LP Industrial. Trocar os quatro arquivos em assets/ resolve,
+           sem tocar nesta marcação. -->
       <picture>
         <source type="image/webp"
-                srcset="./assets/hero-painel-900.webp 900w, ./assets/hero-painel.webp 1600w"
+                srcset="./assets/hero-residencial-900.webp 900w, ./assets/hero-residencial.webp 1600w"
                 sizes="(min-width: 62rem) 52vw, 100vw">
-        <img src="./assets/hero-painel.jpg"
-             srcset="./assets/hero-painel-900.jpg 900w, ./assets/hero-painel.jpg 1600w"
+        <img src="./assets/hero-residencial.jpg"
+             srcset="./assets/hero-residencial-900.jpg 900w, ./assets/hero-residencial.jpg 1600w"
              sizes="(min-width: 62rem) 52vw, 100vw"
              width="1600" height="900" fetchpriority="high" decoding="async"
-             alt="Eletricista da Power Pro, de uniforme azul e amarelo da empresa, fazendo manutenção em um quadro de comando elétrico dentro de uma indústria">
+             alt="Eletricista da Power Pro, de uniforme da empresa, em atendimento">
       </picture>
-      <p class="hero-local">Novo Hamburgo e região metropolitana</p>
+      <p class="hero-local">Atendimento rápido · Segunda a sexta, 8h às 18h</p>
     </div>
 
   </div>
@@ -587,34 +616,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-faixa">
     <div class="wrap">
       <div class="faixa-servicos">
-        <span>Manutenção elétrica industrial</span>
-        <span>Instalação elétrica</span>
-        <span>Painéis e quadros</span>
-        <span>Comandos elétricos</span>
-        <span>Laudos e RT</span>
+        <span>Eletricista Residencial</span>
+        <span>Eletricista Urgente</span>
+        <span>Novo Hamburgo</span>
+        <span>Campo Bom</span>
+        <span>São Leopoldo</span>
+        <span>Porto Alegre</span>
       </div>
-      <p class="faixa-selo">Operação Segura<br>Produção em Movimento</p>
+      <p class="faixa-selo">Atendimento Rápido<br>Diagnóstico no Local</p>
     </div>
   </div>
 </header>
 
-
 <!-- ══ BLOCO 2 · Dor principal ═══════════════════════════════ -->
-<!-- Réplica do segundo mockup aprovado pelo Zamir em 07/09/2026. -->
 <section class="dobra-dupla">
   <div class="wrap">
     <div class="grade">
 
       <div>
-        <p class="rotulo-dobra">Quando a Elétrica Para</p>
+        <p class="rotulo-dobra">Quando a Elétrica Assusta</p>
 
-        <h2>Sua empresa não tem eletricista próprio — e a falha <em>não escolhe hora.</em></h2>
+        <h2>Cheiro de queimado, disjuntor desarmando ou medo de que <em>pegue fogo?</em></h2>
 
-        <p class="lead">Quadro de comando que falhou, máquina parada, entrada de energia com problema. Cada hora de produção parada custa dinheiro — e chamar qualquer um costuma custar mais caro depois.</p>
+        <p class="lead">É mais comum do que parece, e na maioria das vezes tem solução simples e rápida, quando resolvida por quem entende do assunto.</p>
 
         <p class="cta-wrap">
-          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20resolver%20um%20problema%20el%C3%A9trico%20hoje.">
-            <span>Quero resolver isso hoje</span>
+          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20resolver%20um%20problema%20el%C3%A9trico%20na%20minha%20casa%20agora.">
+            <span>Quero resolver isso agora</span>
             <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
               <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -624,20 +652,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="situacoes">
         <div>
-          <h3>Produção parada</h3>
-          <p>Falha elétrica em máquina, painel ou alimentação pode interromper a operação.</p>
+          <h3>Sinal de risco elétrico em casa</h3>
+          <p>Fumaça, cheiro de queimado ou disjuntor desarmando sem motivo aparente.</p>
         </div>
         <div>
-          <h3>Sem eletricista de confiança</h3>
-          <p>A busca por alguém qualificado começa justamente quando a urgência já apareceu.</p>
+          <h3>Eletricista que não aparece</h3>
+          <p>Quem você chamaria não responde, ou demora demais para dar retorno.</p>
         </div>
         <div>
-          <h3>Serviço sem documentação</h3>
-          <p>Resolver o problema sem registro técnico pode gerar retrabalho, auditoria ou problemas com seguro.</p>
+          <h3>Já contratou e não resolveu</h3>
+          <p>Um profissional passou por lá antes e o problema voltou.</p>
         </div>
         <div>
-          <h3>Necessidade de RT ou laudo</h3>
-          <p>Alguns serviços exigem documentação técnica para auditoria, segurança ou compliance.</p>
+          <h3>Medo de ser enganado no orçamento</h3>
+          <p>Sem entender o problema técnico, fica difícil saber se o preço é justo.</p>
         </div>
       </div>
 
@@ -646,21 +674,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ══ BLOCO 3 · Transformação desejada ══════════════════════ -->
-<!-- Réplica do terceiro mockup aprovado pelo Zamir em 07/09/2026. -->
 <section class="dobra-dupla girada">
   <div class="wrap">
     <div class="grade">
 
       <div>
-        <p class="rotulo-dobra">Um Fornecedor para Contar</p>
+        <p class="rotulo-dobra">O Que Muda Depois</p>
 
-        <h2>Um fornecedor técnico só seu, <em>sempre que precisar.</em></h2>
+        <h2>Sua casa segura de novo, <em>ainda hoje.</em></h2>
 
-        <p class="lead">Sem depender de indicação de última hora. Com a Power Pro, sua empresa tem uma equipe especializada para chamar sempre que surgir uma necessidade elétrica — com histórico, documentação e previsibilidade.</p>
+        <p class="lead">Diagnóstico claro, resolução rápida e um eletricista que realmente aparece no horário combinado, sem deixar você esperando.</p>
 
         <p class="cta-wrap">
-          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20fornecedor%20el%C3%A9trico%20de%20confian%C3%A7a%20para%20a%20minha%20empresa.">
-            <span>Quero um fornecedor elétrico de confiança</span>
+          <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20seguran%C3%A7a%20el%C3%A9trica%20na%20minha%20casa%20hoje.">
+            <span>Quero segurança na minha casa hoje</span>
             <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
               <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -675,20 +702,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="situacoes">
         <div>
-          <h3>Menos tempo de máquina parada</h3>
-          <p>Mais continuidade para a sua produção.</p>
+          <h3>Risco eliminado</h3>
+          <p>A tranquilidade de saber que o problema foi resolvido de verdade.</p>
         </div>
         <div>
-          <h3>Documentação técnica organizada</h3>
-          <p>RT e laudo quando aplicável.</p>
+          <h3>Explicação simples</h3>
+          <p>Você entende o que aconteceu e por quê, sem termo técnico desnecessário.</p>
         </div>
         <div>
-          <h3>Quem já conhece sua planta</h3>
-          <p>Histórico e continuidade no atendimento.</p>
+          <h3>Atendimento no mesmo dia</h3>
+          <p>Sempre que houver encaixe possível na agenda.</p>
         </div>
         <div>
-          <h3>Conformidade e segurança</h3>
-          <p>Mais tranquilidade para a operação.</p>
+          <h3>Horário cumprido</h3>
+          <p>Profissional que chega na hora marcada.</p>
         </div>
       </div>
 
@@ -699,41 +726,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 4 · Benefícios e diferenciais ═══════════════════ -->
 <section>
   <div class="wrap">
-    <h2>Por Que Empresas da Região Chamam a Power Pro</h2>
+    <h2>Por Que Famílias da Região Chamam a Power Pro</h2>
 
-    <div class="situacoes largo">
-      <div>
-        <h3>Um Técnico por Frente</h3>
-        <p>Elétrica, climatização e segurança têm cada uma seu especialista.</p>
-      </div>
-      <div>
-        <h3>Documentação Técnica</h3>
-        <p>Emissão de RT e laudo elétrico quando o serviço exigir.</p>
-      </div>
-      <div>
-        <h3>Diagnóstico Antes do Orçamento</h3>
-        <p>O preço vem depois de saber o que o serviço exige.</p>
-      </div>
-      <div>
-        <h3>Resposta no WhatsApp</h3>
-        <p>Retorno em horário comercial, de segunda a sexta.</p>
-      </div>
-      <div>
-        <h3>Garantia em Contrato</h3>
-        <p>Prazo definido conforme o tipo de trabalho executado.</p>
-      </div>
-      <div>
-        <h3>11 Anos de Mercado</h3>
-        <p>Empresa aberta em 2015, com equipe técnica em elétrica, climatização e segurança.</p>
-      </div>
-    </div>
+    <ul class="lista">
+      <li><strong>Combinado é combinado:</strong> o horário marcado é o horário que a equipe chega.</li>
+      <li><strong>Diagnóstico antes do orçamento:</strong> você sabe exatamente o que está pagando e por quê.</li>
+      <li><strong>Equipe especializada:</strong> são eletricistas profissionais, não faz-tudo avulso.</li>
+      <li><strong>Atendimento ágil:</strong> resposta rápida direto pelo WhatsApp.</li>
+      <li><strong>Tradição:</strong> 11 anos de mercado e nota 5 estrelas no Google.</li>
+    </ul>
+
+    <!-- Os três selos vêm prontos da Power Pro. A copy manda usar exatamente
+         este texto, sem alteração. -->
+    <p class="selos">
+      <span>Segurança Garantida</span>
+      <span>Agilidade e Compromisso</span>
+      <span>Qualidade Certificada</span>
+    </p>
 
     <p class="cta-wrap">
-      <a class="cta linha" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20como%20a%20Power%20Pro%20pode%20ajudar%20a%20minha%20empresa.">
-        <span>Ver como podemos ajudar sua empresa</span>
-        <svg class="seta" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
-          <path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20como%20a%20Power%20Pro%20pode%20me%20ajudar.">
+        Ver como podemos ajudar
       </a>
     </p>
   </div>
@@ -742,20 +755,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 5 · Serviços oferecidos ═════════════════════════ -->
 <section>
   <div class="wrap">
-    <h2>Serviços de Elétrica Industrial</h2>
+    <h2>Serviços de Elétrica Residencial</h2>
+    <p class="lead">Serviços elétricos completos para residências, comércios e indústrias.</p>
 
-    <ul class="circuitos">
-      <li>Manutenção elétrica industrial (preventiva e corretiva)</li>
-      <li>Instalação elétrica industrial</li>
-      <li>Manutenção e montagem de painel elétrico</li>
-      <li>Montagem de quadro elétrico</li>
-      <li>Comando elétrico industrial</li>
-      <li>Manutenção de máquinas industriais</li>
-      <li>Instalação elétrica de máquinas</li>
-      <li>Infraestrutura e adequação elétrica industrial</li>
-      <li>Projeto elétrico industrial</li>
-      <li>Laudo elétrico industrial (RT)</li>
-    </ul>
+    <div class="circuitos">
+      <div><span>Projetos elétricos e laudos técnicos (predial, residencial e industrial)</span></div>
+      <div><span>Montagem de quadros elétricos e de comando</span></div>
+      <div><span>Cabeamento estruturado, padrão de entrada, telefonia e internet</span></div>
+      <div><span>Manutenção elétrica preventiva e corretiva</span></div>
+      <div><span>CFTV, câmeras e alarmes (sistemas de segurança)</span></div>
+    </div>
 
     <p class="cta-wrap">
       <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20N%C3%A3o%20achei%20o%20servi%C3%A7o%20que%20preciso%20na%20p%C3%A1gina.%20Podem%20me%20ajudar%3F">
@@ -768,19 +777,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 6 · Comparativo ═════════════════════════════════ -->
 <section>
   <div class="wrap">
-    <h2>Como a Power Pro Executa</h2>
+    <h2>O que a maioria promete. O que a Power Pro cumpre.</h2>
 
     <ul class="lista">
-      <li><strong>Atuação Multidisciplinar:</strong> três técnicos especialistas, um por frente: elétrica, climatização e segurança.</li>
-      <li><strong>Rigor Técnico:</strong> execução conforme as normas de segurança e as orientações do fabricante.</li>
-      <li><strong>Conformidade Legal:</strong> RT emitida sempre que o serviço exigir.</li>
-      <li><strong>Transparência:</strong> diagnóstico antes do orçamento fechado.</li>
-      <li><strong>Segurança:</strong> garantia formalizada em contrato, com prazo definido.</li>
+      <li><strong>Pontualidade real:</strong> chegamos no horário combinado, não em algum momento do dia.</li>
+      <li><strong>Transparência:</strong> diagnóstico prévio antes do orçamento fechado, sem surpresa na hora de pagar.</li>
+      <li><strong>Compromisso:</strong> o serviço é executado até o fim, sem sumiço no meio do trabalho.</li>
+      <li><strong>Equipe qualificada:</strong> técnico especializado, não ajudante sem formação.</li>
     </ul>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20servi%C3%A7o%20el%C3%A9trico%20com%20garantia%20de%20verdade.">
-        Quero um serviço com garantia de verdade
+      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20um%20atendimento%20que%20n%C3%A3o%20vai%20me%20deixar%20na%20m%C3%A3o.">
+        Quero um atendimento que não vai me deixar na mão
       </a>
     </p>
   </div>
@@ -789,24 +797,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 7 · Autoridade da empresa ═══════════════════════ -->
 <section>
   <div class="wrap">
-    <h2>11 Anos de Power Pro. 16 Anos de Expertise Técnica.</h2>
+    <h2>11 Anos de Power Pro</h2>
 
     <dl class="dados">
       <div>
-        <dt>No Mercado</dt>
-        <dd>Empresa consolidada desde 2015.</dd>
+        <dt class="rotulo">No Mercado</dt>
+        <dd>Empresa no mercado desde 2015.</dd>
       </div>
       <div>
-        <dt>Atendimento</dt>
-        <dd>Residencial, comercial e industrial.</dd>
+        <dt class="rotulo">Atendimento</dt>
+        <dd>Residencial, comercial e industrial na região metropolitana de Porto Alegre.</dd>
       </div>
       <div>
-        <dt>Cobertura</dt>
-        <dd>Região metropolitana de Porto Alegre, em raio de até 60 km de Novo Hamburgo/RS.</dd>
-      </div>
-      <div>
-        <dt>Equipe</dt>
+        <dt class="rotulo">Equipe</dt>
         <dd>Técnicos especializados em elétrica, climatização/refrigeração e segurança eletrônica.</dd>
+      </div>
+      <div>
+        <dt class="rotulo">Cobertura</dt>
+        <dd>Atuação em raio de até 60 km de Novo Hamburgo/RS.</dd>
       </div>
     </dl>
 
@@ -821,44 +829,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 8 · Prova social ════════════════════════════════ -->
 <section>
   <div class="wrap">
-    <h2>Nota 5 estrelas no Google. Quem já contratou, aprova.</h2>
+    <h2>Nota 5 estrelas no Google. Quem já chamou, aprova.</h2>
 
     <div class="grid tres">
-      <div class="card">
+      <!-- A Adriana responde direto à objeção mais comum deste público, que é o
+           profissional que não aparece. A copy pede este card em destaque. -->
+      <div class="card principal">
         <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
-        <blockquote>"O Ezequiel prestou alguns serviços de elétrica, rede, instalação de câmeras e alarmes em nossa empresa. Todos os serviços foram executados com alta qualidade e capricho. O profissional é altamente capacitado e responsável, além de ser extremamente pontual e com uma relação custo-benefício muito maior que outras empresas, preço extremamente justo. Recomendo os serviços!"</blockquote>
-        <p class="autor">ID Desenvolvimento</p>
-      </div>
-      <div class="card">
-        <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
-        <blockquote>"Excelente profissional, usou apenas materiais de qualidade e tirou todas as minhas dúvidas."</blockquote>
-        <p class="autor">Brahian Guedes</p>
+        <blockquote>"Excelentes profissionais. Vieram no dia e horário marcados, fizeram o serviço que ficou ótimo. Recomendo."</blockquote>
+        <p class="autor">Adriana Passos Cabral</p>
       </div>
       <div class="card">
         <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
         <blockquote>"Ótimo profissional, serviço realizado com muito capricho. Preço justo e muito atencioso para tirar todas as dúvidas. Super indico."</blockquote>
         <p class="autor">Kellin Francine</p>
       </div>
+      <div class="card">
+        <p class="estrelas" aria-label="Cinco estrelas">★★★★★</p>
+        <blockquote>"Excelente profissional, usou apenas materiais de qualidade e tirou todas as minhas dúvidas."</blockquote>
+        <p class="autor">Brahian Guedes</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ BLOCO 9 · Como funciona o atendimento ═════════════════ -->
+<!-- ══ BLOCO 9 · Processo de atendimento ═════════════════════ -->
 <section>
   <div class="wrap">
-    <h2>Do contato à solução, sem burocracia</h2>
+    <h2>Do contato à solução, sem enrolação</h2>
 
     <div class="grid tres">
-      <div class="card"><span class="num">1</span><p>Você chama no WhatsApp e explica o problema ou a necessidade.</p></div>
-      <div class="card"><span class="num">2</span><p>Agendamos a visita técnica para diagnóstico no local.</p></div>
-      <div class="card"><span class="num">3</span><p>Você recebe o orçamento detalhado com a solução necessária.</p></div>
-      <div class="card"><span class="num">4</span><p>Executamos o serviço com equipe técnica especializada.</p></div>
-      <div class="card"><span class="num">5</span><p>Entregamos a documentação técnica (RT/laudo, quando aplicável).</p></div>
+      <div class="card"><span class="num">1</span><p>Você chama no WhatsApp e explica o que está acontecendo.</p></div>
+      <div class="card"><span class="num">2</span><p>Agendamos a visita técnica o quanto antes.</p></div>
+      <div class="card"><span class="num">3</span><p>Diagnóstico no local e orçamento claro, antes de qualquer execução.</p></div>
+      <div class="card"><span class="num">4</span><p>Executamos o reparo com equipe técnica especializada.</p></div>
+      <div class="card"><span class="num">5</span><p>Sua casa segura, com explicação simples do que foi feito.</p></div>
     </div>
 
     <p class="cta-wrap">
       <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20iniciar%20o%20atendimento.">
-        Iniciar o atendimento agora
+        Iniciar atendimento agora
       </a>
     </p>
   </div>
@@ -867,23 +877,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 10 · Resposta às objeções ═══════════════════════ -->
 <section>
   <div class="wrap">
-    <h2>Antes de fechar com outra empresa, considere isso:</h2>
+    <h2>Antes de chamar qualquer um, considere isso:</h2>
 
     <div class="objecao">
+      <p class="fala">"Já contratei um eletricista antes e não resolveu"</p>
+      <p class="resposta">São 11 anos de mercado e nota 5 estrelas no Google. O compromisso é aparecer no horário marcado e resolver de verdade.</p>
+    </div>
+    <div class="objecao">
       <p class="fala">"Nunca ouvi falar da Power Pro"</p>
-      <p class="resposta">São 11 anos de mercado, atuação documentada com RT e garantia formal por contrato.</p>
+      <p class="resposta">Empresa consolidada desde 2015, com avaliações reais e verificáveis de clientes da região.</p>
     </div>
     <div class="objecao">
-      <p class="fala">"Vou pedir mais de um orçamento"</p>
-      <p class="resposta">Faça isso. Peça também que o outro orçamento inclua diagnóstico técnico prévio e emissão de laudo/RT. É isso que evita retrabalho e custos escondidos.</p>
-    </div>
-    <div class="objecao">
-      <p class="fala">"Preciso resolver rápido, não posso esperar dias"</p>
-      <p class="resposta">Atendimento ágil direto pelo WhatsApp com retorno rápido em horário comercial, de segunda a sexta.</p>
+      <p class="fala">"Preciso de atendimento fora do horário comercial"</p>
+      <p class="resposta">Atendimento de segunda a sexta, das 8h às 18h, mediante agendamento. Dentro desse horário, a resposta é rápida e sem burocracia.</p>
     </div>
 
     <p class="cta-wrap">
-      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Tenho%20d%C3%BAvidas%20sobre%20o%20servi%C3%A7o%20el%C3%A9trico%20industrial.">
+      <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Tenho%20d%C3%BAvidas%20sobre%20o%20atendimento%20residencial.">
         Tirar minhas dúvidas agora
       </a>
     </p>
@@ -894,8 +904,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section>
   <div class="wrap">
     <div class="destaque-bloco">
-      <h2>Serviço com Garantia Formal por Contrato</h2>
-      <p class="lead">Elétrica industrial não é lugar para "confia em mim". Todo serviço da Power Pro é formalizado em contrato, com prazo de garantia definido conforme o tipo de trabalho executado.</p>
+      <h2>Serviço com Garantia Formal</h2>
+      <p class="lead">Elétrica residencial não é lugar para "depois eu vejo". Todo serviço da Power Pro é formalizado, com prazo de garantia definido conforme o tipo de trabalho executado.</p>
 
       <p class="cta-wrap">
         <a class="cta secundario" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20a%20garantia%20do%20servi%C3%A7o.">
@@ -913,23 +923,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <details>
       <summary>Vocês atendem em qual região?</summary>
-      <p>Novo Hamburgo, Campo Bom, São Leopoldo, Sapiranga, Dois Irmãos, Ivoti, Portão, Canoas, Porto Alegre e toda a região metropolitana, em um raio de até 60 km.</p>
+      <p>Novo Hamburgo, Campo Bom, São Leopoldo, Porto Alegre e região metropolitana, em um raio de até 60 km.</p>
     </details>
     <details>
-      <summary>Emitem laudo técnico (RT)?</summary>
-      <p>Sim, sempre que o serviço exigir documentação técnica formal conforme normas vigentes.</p>
+      <summary>Atendem no mesmo dia?</summary>
+      <p>Buscamos agendar o mais rápido possível dentro do horário comercial. Entre em contato pelo WhatsApp para verificarmos o encaixe mais próximo.</p>
     </details>
     <details>
-      <summary>Atendem empresas que ainda não têm eletricista próprio?</summary>
-      <p>Sim. Esse é um dos principais motivos pelos quais empresas industriais nos procuram.</p>
+      <summary>Emitem laudo técnico residencial, quando necessário?</summary>
+      <p>Sim, sempre que o serviço exigir documentação técnica formal.</p>
     </details>
     <details>
       <summary>Como funciona o orçamento?</summary>
-      <p>Fazemos uma visita técnica de diagnóstico antes de fechar o valor, para que você saiba exatamente o que está contratando e evite custos extras imprevisíveis.</p>
+      <p>Fazemos o diagnóstico no local antes de fechar o valor, para você saber exatamente o que está contratando. Valores são tratados diretamente com o time comercial.</p>
     </details>
     <details>
-      <summary>Qual o prazo de atendimento?</summary>
-      <p>Respondemos pelo WhatsApp em horário comercial, de segunda a sexta-feira, das 8h às 18h.</p>
+      <summary>Qual o horário de atendimento?</summary>
+      <p>Segunda a sexta-feira, das 8h às 18h, mediante agendamento.</p>
     </details>
 
     <p class="cta-wrap">
@@ -943,11 +953,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══ BLOCO 13 · CTA final ══════════════════════════════════ -->
 <section class="fecho">
   <div class="wrap">
-    <h2>Sua produção não pode esperar. Fale agora com a Power Pro.</h2>
-    <p class="lead">Atendimento rápido, diagnóstico técnico e documentação completa em toda a região metropolitana de Porto Alegre.</p>
+    <h2>Sua casa não pode esperar. Fale agora com a Power Pro.</h2>
+    <p class="lead">Atendimento rápido, diagnóstico técnico claro e uma equipe que realmente aparece, em toda a região metropolitana de Porto Alegre.</p>
 
     <p class="cta-wrap">
-      <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20industrial.">
+      <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20residencial.">
         Chamar no WhatsApp agora
       </a>
     </p>
@@ -968,7 +978,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ══ Barra fixa ════════════════════════════════════════════ -->
 <div class="barra">
-  <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20industrial%20e%20preciso%20de%20atendimento.">
+  <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
     Fale com um especialista
   </a>
 </div>
