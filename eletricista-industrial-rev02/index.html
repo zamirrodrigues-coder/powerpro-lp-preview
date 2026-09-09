@@ -375,6 +375,25 @@
        perdia os vazados internos das letras. */
     .logo-marca { width: 186px; height: auto; }
     @media (max-width: 46rem) { .logo-marca { width: 152px; } }
+
+    /* ═══ CELULAR ══════════════════════════════════════════════
+       Estas regras vêm no fim de propósito: têm a mesma especificidade das
+       declarações base, então quem decide é a ordem. */
+    @media (max-width: 46rem) {
+      /* A faixa era lista flexível: ao quebrar linha, o traço reaparecia no
+         começo de cada uma, em posições diferentes. Vira grade de duas colunas,
+         com o traço sempre na mesma, um debaixo do outro. */
+      .termos .wrap, .termos {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 14px 0;
+      }
+      .termos span { padding: 0; border-left: 0; }
+      .termos span:nth-child(even) { padding-left: 22px; border-left: 1px solid var(--line, rgb(255 255 255 / 11%)); }
+
+      /* O botão da abertura repetia o rótulo da barra fixa, logo acima dela.
+         Sai por CSS e não do HTML: a âncora continua no documento e o widget do
+         ScaleAds segue assumindo os 13 CTAs. */
+      .abertura .acao { display: none; }
+    }
   </style>
 </head>
 <body>

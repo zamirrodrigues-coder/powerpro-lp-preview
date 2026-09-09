@@ -260,7 +260,7 @@
     /* ── Seção com a grade ao fundo ────────────────────────────── */
 
     /* ── Blocos de conteúdo ────────────────────────────────────── */
-    .duas { display: grid; gap: 40px; }
+    .duas { display: grid; gap: var(--v6); }
     @media (min-width: 62rem) { .duas { grid-template-columns: 1fr 1fr; gap: var(--v12); align-items: start; } }
 
     .pontos > div { padding: 22px 0; border-top: 1px solid var(--rule-soft); }
@@ -273,7 +273,7 @@
     .duplo p { margin: 0; max-width: 42ch; }
 
     /* Serviços numerados como circuitos de um quadro de comando. */
-    .circuitos { margin: 34px 0 0; counter-reset: c; }
+    .circuitos { margin: var(--v6) 0 0; counter-reset: c; }
     .circuitos > div {
       display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 16px;
       align-items: baseline; padding: 15px 0;
@@ -289,7 +289,7 @@
     @media (min-width: 62rem) { .circuitos { columns: 2; column-gap: 4rem; } .circuitos > div { break-inside: avoid; } }
 
     /* ── Ficha ─────────────────────────────────────────────────── */
-    .ficha { margin: 34px 0 0; }
+    .ficha { margin: var(--v6) 0 0; }
     .ficha > div { display: grid; gap: .2rem 2rem; padding: 20px 0; border-top: 1px solid var(--rule-soft); }
     .ficha > div:last-child { border-bottom: 1px solid var(--rule-soft); }
     @media (min-width: 40rem) { .ficha > div { grid-template-columns: 10rem 1fr; align-items: baseline; } }
@@ -297,7 +297,7 @@
     .ficha dd { margin: 0; color: var(--text-soft); }
 
     /* ── Depoimentos ───────────────────────────────────────────── */
-    .vozes { display: grid; gap: 0; margin-top: 34px; }
+    .vozes { display: grid; gap: 0; margin-top: var(--v6); }
     @media (min-width: 62rem) { .vozes { grid-template-columns: repeat(3, 1fr); gap: 0 var(--v6); } }
     .vozes figure { margin: 0; padding: 26px 0; border-top: 1px solid var(--rule-soft); }
     .vozes blockquote { margin: 0 0 14px; color: var(--text-soft); font-weight: 300; }
@@ -364,6 +364,42 @@
        perdia os vazados internos das letras. */
     .logo-marca { width: 186px; height: auto; }
     @media (max-width: 46rem) { .logo-marca { width: 152px; } }
+
+    /* ═══ CELULAR ══════════════════════════════════════════════
+       Os espaçamentos acima foram calibrados para o desktop, onde texto e foto
+       ficam lado a lado e sobra largura. Empilhados numa tela de 390px, os
+       mesmos valores viram buraco: a dobra abria com quase 110px de vazio antes
+       do logo e deixava outros 118px entre o botão e a fotografia. */
+    @media (max-width: 46rem) {
+      section { padding-block: var(--v8); }
+
+      .capa-texto { padding: var(--v6) var(--gutter) var(--v6); }
+      .marca { margin-bottom: var(--v4); }
+      h1 { margin-bottom: var(--v3); }
+      .acao { margin-top: var(--v4); }
+
+      /* O botão da abertura sai de vista no celular: ele repetia o mesmo rótulo
+         da barra fixa, logo acima dela. Sai por CSS e não do HTML de propósito,
+         para a âncora continuar no documento e o widget do ScaleAds seguir
+         assumindo os 13 CTAs. */
+      .capa .acao { display: none; }
+
+      /* O fecho é centralizado no desktop. Na coluna estreita isso jogava o
+         título 33px para dentro e quebrava o eixo justamente no bloco do CTA
+         final. No celular ele acompanha o resto da página. */
+      .fecho { text-align: left; }
+      .fecho h2, .fecho .lead { margin-left: 0; margin-right: 0; }
+      .fecho .acao { justify-content: flex-start; }
+
+      /* A faixa era lista flexível: ao quebrar linha, o traço reaparecia no
+         começo de cada uma, em posições diferentes. Vira grade de duas colunas,
+         com o traço sempre na mesma coluna, um debaixo do outro.
+         Estas regras precisam vir DEPOIS da declaração base de `.termos span`:
+         têm a mesma especificidade, então quem vence é a ordem. */
+      .termos .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: var(--v2) 0; }
+      .termos span { padding: 0; border-left: 0; }
+      .termos span:nth-child(even) { padding-left: var(--v3); border-left: 1px solid var(--rule); }
+    }
   </style>
 </head>
 <body>
@@ -738,7 +774,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <h2>Perguntas frequentes</h2>
 
-    <div style="margin-top:34px">
+    <div style="margin-top:48px">
       <details>
         <summary>Vocês atendem em qual região?</summary>
         <p>Novo Hamburgo, Campo Bom, São Leopoldo, Sapiranga, Dois Irmãos, Ivoti, Portão, Canoas, Porto Alegre e toda a região metropolitana, em um raio de até 60 km.</p>
