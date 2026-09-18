@@ -538,6 +538,16 @@
       display: grid; grid-template-columns: 7.25rem 1fr; gap: 1rem;
       padding: .875rem 0; border-bottom: 1px solid var(--line-soft);
     }
+    /* Abaixo de 360px a coluna fixa do rótulo não deixa lugar para o texto, e
+       a linha ficava MAIS LARGA que a tela: 321px numa tela de 280, porque
+       "climatização/refrigeração" não quebrava. Isso não era só um bloco
+       vazando. O navegador do celular alargava a área de layout da página
+       inteira para caber essa linha, e tudo, inclusive o hero, passava a
+       quebrar numa largura maior que a tela visível e aparecia cortado à
+       direita. Aqui o rótulo sobe para cima do texto, como a industrial faz. */
+    @media (max-width: 22.4375rem) {
+      .dados > div { grid-template-columns: 1fr; gap: .25rem; }
+    }
     .dados dt {
       font-family: var(--font-text); font-size: .72rem; font-weight: 600;
       letter-spacing: .15em; text-transform: uppercase;
@@ -978,7 +988,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <dt class="rotulo">Equipe</dt>
-        <dd>Técnicos especializados em elétrica, climatização/refrigeração e segurança eletrônica.</dd>
+        <dd>Técnicos especializados em elétrica, climatização/<wbr>refrigeração e segurança eletrônica.</dd>
       </div>
       <div>
         <dt class="rotulo">Cobertura</dt>
