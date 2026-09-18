@@ -207,17 +207,34 @@
       padding: 2.125rem 1.25rem 2.5rem;
       display: flex; flex-direction: column; justify-content: center;
     }
+    /* ═══ CADA DOBRA É UMA TELA ═══════════════════════════════
+       Pedido do Zamir em 18/09: as três dobras que vieram dos mockups ocupam
+       exatamente uma tela cada, como a abertura da industrial. Antes o hero
+       tinha altura fixa de 33rem, terminava antes do fim da tela, e a segunda
+       dobra aparecia cortada embaixo da primeira.
+
+       Só no desktop. No celular as colunas empilham e o conteúdo de cada
+       dobra já passa de uma tela; forçar a altura só acrescentaria vazio.
+
+       O respiro vertical acompanha a ALTURA da tela (svh), para a dobra caber
+       também em notebook baixo, onde 3,5rem fixos em cima e embaixo
+       empurravam a faixa de serviços para fora da primeira tela. */
     @media (min-width: 62rem) {
+      .hero { display: flex; flex-direction: column; min-height: 100svh; }
+      .hero-grade { flex: 1 0 auto; }
       .hero-texto {
-        padding: 3.5rem clamp(2rem, 4.4vw, 4.25rem) 3.5rem var(--borda);
-        min-height: 33rem;
+        padding: clamp(2rem, 6svh, 3.5rem) clamp(2rem, 4.4vw, 4.25rem) clamp(2rem, 6svh, 3.5rem) var(--borda);
       }
     }
 
     /* Logo com o raio, como no mockup. */
+    /* A margem de baixo era `auto`: com o hero crescendo até a altura da tela,
+       ela prendia o logo no topo e jogava todo o texto para o pé da dobra,
+       com um vão no meio. A industrial resolveu o mesmo problema assim: a
+       marca é o primeiro item do bloco, e o bloco inteiro centraliza. */
     .hero-logo {
       display: flex; align-items: center; gap: .6875rem;
-      margin: 0 0 auto; padding-bottom: 2.875rem;
+      margin: 0; padding-bottom: 2.875rem;
     }
     .hero-logo svg { flex: 0 0 auto; }
     .hero-logo b {
@@ -330,6 +347,15 @@
     @media (min-width: 56rem) {
       .hero-faixa .wrap { padding-right: 19rem; }
     }
+    /* Desde que o hero passou a ocupar a tela inteira (18/09), a faixa fica
+       exatamente no rodapé da primeira tela, na mesma altura do botão
+       flutuante. Medido: o botão ocupa 341px a partir da borda direita
+       (313 de largura + 28 de recuo), e os 19rem (304px) deixavam o selo 37px
+       por baixo dele em 1440 e 1536. 23rem dão 27px de folga, e em rem a
+       folga acompanha a escala em tela grande. */
+    @media (min-width: 62rem) {
+      .hero-faixa .wrap { padding-right: 23rem; }
+    }
     .faixa-selo::before {
       content: ""; width: 2.125rem; height: 2px; background: var(--brand); flex: 0 0 auto;
     }
@@ -342,11 +368,17 @@
        escurecida. O mockup mostra uma chapa metálica que eu não
        tenho como arquivo, e essa foto já está no cache do visitante
        quando esta dobra aparece: dá a mesma textura sem pedir um
-       download novo numa página de mídia paga. */
+       download novo numa página de mídia paga.
+
+       CORREÇÃO 18/09: o caminho apontava para `hero-painel-900.webp`, o
+       nome antigo da foto da INDUSTRIAL, copiado junto com a estrutura. Esse
+       arquivo nunca existiu nesta pasta (e nem na industrial, depois que os
+       nomes ganharam versão): o fundo dava 404 e as duas dobras caíam no
+       preto chapado. A foto da primeira dobra desta página é a residencial. */
     .dobra-dupla { position: relative; overflow: hidden; background: #121212; }
     .dobra-dupla::before {
       content: ""; position: absolute; inset: 0;
-      background: url("./assets/hero-painel-900.webp") center/cover no-repeat;
+      background: url("./assets/hero-residencial-v2-900.webp") center/cover no-repeat;
       filter: blur(7px) grayscale(.35) brightness(.26);
       transform: scale(1.08);   /* cobre a borda que o blur esfuma */
     }
@@ -355,6 +387,15 @@
       background: linear-gradient(105deg, rgb(13 13 13 / 96%) 38%, rgb(13 13 13 / 74%));
     }
     .dobra-dupla > .wrap { position: relative; z-index: 1; }
+    /* Cada dobra dupla também ocupa uma tela no desktop, com o conteúdo
+       centralizado na altura (ver CADA DOBRA É UMA TELA, no hero). */
+    @media (min-width: 62rem) {
+      .dobra-dupla {
+        min-height: 100svh; display: flex; align-items: center;
+        padding-block: clamp(3rem, 10svh, 6rem);
+      }
+      .dobra-dupla > .wrap { width: 100%; }
+    }
 
     .dobra-dupla .grade {
       display: grid; gap: 2.75rem;
@@ -648,6 +689,25 @@
          num vão estreito, o texto vira quatro linhas em bandeira. */
       .fecho { text-align: left; }
       .fecho .cta-wrap { justify-content: flex-start; }
+    }
+
+    /* ═══ NOTEBOOK BAIXO ══════════════════════════════════════
+       Vem no fim de propósito, como o bloco de celular: estas regras têm a
+       mesma especificidade das declarações base do hero, e quem decide é a
+       ordem.
+
+       Notebook baixo: 1366x768 e menores, que com a barra do navegador deixam
+       650px de tela ou menos. Ali o conteúdo do hero somava 590px e a faixa
+       de serviços mais 113, então a faixa ficava fora da primeira tela. Só o
+       respiro vertical e o corpo do título encolhem; texto e ordem não mudam.
+       De 721px de altura para cima nada disto vale. */
+    @media (min-width: 62rem) and (max-height: 45rem) {
+      .hero-texto { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+      .hero-logo { padding-bottom: 1.5rem; }
+      .hero h1 { font-size: 2.5rem; margin-bottom: .75rem; }
+      .hero .lead { margin-bottom: 1rem; }
+      .hero-creds { margin-top: .75rem; }
+      .hero-faixa { padding-top: .75rem; padding-bottom: .75rem; }
     }
   </style>
 <body>
