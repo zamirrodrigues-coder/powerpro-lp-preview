@@ -377,12 +377,6 @@
       h1 { margin-bottom: var(--v3); }
       .acao { margin-top: var(--v4); }
 
-      /* O botão da abertura sai de vista no celular: ele repetia o mesmo rótulo
-         da barra fixa, logo acima dela. Sai por CSS e não do HTML de propósito,
-         para a âncora continuar no documento e o widget do ScaleAds seguir
-         assumindo os 13 CTAs. */
-      .capa .acao { display: none; }
-
       /* O fecho é centralizado no desktop. Na coluna estreita isso jogava o
          título 33px para dentro e quebrava o eixo justamente no bloco do CTA
          final. No celular ele acompanha o resto da página. */
@@ -422,15 +416,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <p class="lead">Manutenção, instalação e adequação elétrica industrial com diagnóstico técnico no local e documentação quando necessário.</p>
 
-    <p class="acao">
-      <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20industrial%20e%20preciso%20de%20atendimento.">
-        <span class="rotulo-cta">Fale com um especialista</span>
-        <span class="disco">
-          <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-          <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-        </span>
-      </a>
-    </p>
+    <!-- O botão da abertura saiu em 18/09, a pedido do Zamir: repetia o
+         flutuante, que já está na tela desde o primeiro segundo. O pill ficou
+         só no flutuante; ao longo da página as ações são links em texto. -->
 
     <p class="capa-creds">
       <span>Diagnóstico no local</span>
@@ -812,12 +800,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="lead">Atendimento rápido, diagnóstico técnico e documentação completa em toda a região metropolitana de Porto Alegre.</p>
 
     <p class="acao">
-      <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20industrial.">
-        <span class="rotulo-cta">Chamar no WhatsApp agora</span>
-        <span class="disco">
-          <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-          <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-        </span>
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20industrial.">
+        Chamar no WhatsApp agora
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>

@@ -116,9 +116,10 @@
        por baixo, dando a impressão de uma só girando.
 
        Antes esta página tinha QUATRO tratamentos de botão convivendo
-       (cheio, destaque, contorno e linha). Agora são dois: o pill nos três
-       momentos de peso (abertura, fecho e barra fixa) e o link com seta nos
-       dez intermediários. A MARCAÇÃO não muda: continuam âncora com href
+       (cheio, destaque, contorno e linha). Agora são dois: o pill só no
+       flutuante, e o link com seta nas outras onze ações (desde 18/09 o
+       pill saiu da abertura e do fecho, porque repetia o flutuante que já
+       estava na tela). A MARCAÇÃO não muda: continuam âncora com href
        real de wa.me, senão o widget do ScaleAds deixa de assumir e o lead
        não nasce. */
     .cta {
@@ -620,11 +621,6 @@
          num vão estreito, o texto vira quatro linhas em bandeira. */
       .fecho { text-align: left; }
       .fecho .cta-wrap { justify-content: flex-start; }
-
-      /* O botão da abertura repetia o rótulo da barra fixa, logo acima dela.
-         Sai por CSS e não do HTML: a âncora continua no documento e o widget do
-         ScaleAds segue assumindo os 13 CTAs. */
-      .hero .cta-wrap { display: none; }
     }
   </style>
 <body>
@@ -652,15 +648,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <p class="lead">Disjuntor desarmando, cheiro de queimado ou fumaça? Diagnóstico técnico no local, explicado em linguagem simples, com atendimento rápido em toda a região metropolitana.</p>
 
-      <p class="cta-wrap">
-        <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
-          <span class="rotulo-cta">Fale com um especialista</span>
-          <span class="disco">
-            <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-            <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-          </span>
-        </a>
-      </p>
+      <!-- O botão da abertura saiu em 18/09, a pedido do Zamir: repetia o
+           flutuante, que já está na tela desde o primeiro segundo. O pill ficou
+           só no flutuante; ao longo da página as ações são links em texto. -->
 
       <!-- A copy pede este aviso de propósito: o anúncio fala em urgência no
            sentido de resposta rápida, e sem esta linha quem clica fora do
@@ -1060,12 +1050,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="lead">Atendimento rápido, diagnóstico técnico claro e uma equipe que realmente aparece, em toda a região metropolitana de Porto Alegre.</p>
 
     <p class="cta-wrap">
-      <a class="cta" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20residencial.">
-        <span class="rotulo-cta">Chamar no WhatsApp agora</span>
-        <span class="disco">
-          <svg class="sai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-          <svg class="entra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-        </span>
+      <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Preciso%20falar%20com%20a%20Power%20Pro%20sobre%20el%C3%A9trica%20residencial.">
+        Chamar no WhatsApp agora
+        <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
       </a>
     </p>
   </div>
