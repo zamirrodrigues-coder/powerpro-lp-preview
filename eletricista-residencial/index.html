@@ -710,12 +710,19 @@
        650px de tela ou menos. Ali o conteúdo do hero somava 590px e a faixa
        de serviços mais 113, então a faixa ficava fora da primeira tela. Só o
        respiro vertical e o corpo do título encolhem; texto e ordem não mudam.
-       De 721px de altura para cima nada disto vale. */
-    @media (min-width: 62rem) and (max-height: 45rem) {
-      .hero-texto { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+       De 801px de altura para cima nada disto vale.
+
+       O limiar subiu de 720 para 800px em 21/09, quando a ação em texto
+       entrou na primeira dobra: com ela, a dobra passava da tela também em
+       1536x730 e 1440x780, que é o notebook de 1080p com escala de 125%. O
+       corpo do título acompanha a altura da tela dentro desta faixa, para
+       degradar de 800 até 600px sem um segundo degrau. */
+    @media (min-width: 62rem) and (max-height: 50rem) {
+      .hero-texto { padding-top: clamp(1.25rem, 3svh, 1.5rem); padding-bottom: clamp(1.25rem, 3svh, 1.5rem); }
       .hero-logo { padding-bottom: 1.5rem; }
-      .hero h1 { font-size: 2.5rem; margin-bottom: .75rem; }
+      .hero h1 { font-size: clamp(2.2rem, 6svh, 2.5rem); margin-bottom: .75rem; }
       .hero .lead { margin-bottom: 1rem; }
+      .hero .cta-wrap { margin-top: 1.5rem; }
       .hero-creds { margin-top: .75rem; }
       .hero-faixa { padding-top: .75rem; padding-bottom: .75rem; }
     }
@@ -745,9 +752,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <p class="lead">Disjuntor desarmando, cheiro de queimado ou fumaça? Diagnóstico técnico no local, explicado em linguagem simples, com atendimento rápido em toda a região metropolitana.</p>
 
-      <!-- O botão da abertura saiu em 18/09, a pedido do Zamir: repetia o
-           flutuante, que já está na tela desde o primeiro segundo. O pill ficou
-           só no flutuante; ao longo da página as ações são links em texto. -->
+      <!-- O pill da abertura saiu em 18/09 porque repetia o flutuante, que já
+           está na tela desde o primeiro segundo. Em 21/09 a Paula pediu uma ação
+           na primeira dobra da industrial, e ela entra aqui também: as duas
+           páginas abrem do mesmo jeito, que é o ponto do pedido dela. Formato
+           de link em texto, como as outras onze; o pill segue só no flutuante. -->
+      <p class="cta-wrap">
+        <a class="cta-texto" href="https://wa.me/5551991762059?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20de%20eletricista%20residencial%20e%20preciso%20de%20atendimento.">
+          Fale com um especialista
+          <svg width="18" height="13" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6.7 18.9 7l-6.3 6.3M18.4 7H0"/></svg>
+        </a>
+      </p>
 
       <!-- A copy pede este aviso de propósito: o anúncio fala em urgência no
            sentido de resposta rápida, e sem esta linha quem clica fora do
