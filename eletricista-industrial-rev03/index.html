@@ -5,17 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d0d0d">
   <meta name="description" content="Eletricista industrial em Novo Hamburgo e região metropolitana de Porto Alegre. Manutenção, instalação e adequação elétrica industrial com laudo técnico (RT), diagnóstico no local e garantia formal por contrato.">
+  <meta name="robots" content="noindex, nofollow">
   <title>Eletricista Industrial em Novo Hamburgo e Região | Power Pro Soluções Elétricas</title>
 
   <!-- PENDENTE: favicon entra junto com o logo oficial do cliente. -->
-
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MPSJ8HHT');</script>
-  <!-- End Google Tag Manager -->
 
   <style>
     /* ═══════════════════════════════════════════════════════════
@@ -105,14 +98,16 @@
        Peso leve no display, tracking negativo porque é grande, e
        leading apertado. O corpo fica no oposto: peso normal,
        tracking zero, leading folgado. */
-    /* Corpo do título alinhado com o da residencial, a pedido da Paula em
-       21/09: aqui ele estava em 83px contra 50px de lá, 65% maior, e as duas
-       páginas do mesmo cliente não podiam abrir em escalas tão diferentes.
-       Fica um pouco acima do dela de propósito: este título é de peso leve e
-       o de lá é serif em negrito, que ocupa mais no mesmo corpo. */
+    /* Corpo do título com a MESMA escala da residencial (`.hero h1` de lá).
+       Em 21/09, a pedido da Paula, ele desceu de 83px para 56px, mas ficou
+       acima dos 50px da residencial de propósito, por ser de peso leve. Em
+       23/09 o gestor pediu de novo o padrão visual da empresa: o título ainda
+       lia maior que o da residencial. Agora os dois usam o mesmo clamp em
+       todas as telas; a família e o peso continuam os desta página, porque o
+       serif em negrito de lá ocupa mais linhas no mesmo corpo. */
     h1 {
       margin: 0 0 var(--v4);
-      font-size: clamp(2.1rem, 5.4vw, 3.5rem);
+      font-size: clamp(2rem, 4.6vw, 3.15rem);
       font-weight: 400;
       line-height: 1.02;
       letter-spacing: -0.035em;
@@ -431,18 +426,13 @@
     @media (min-width: 62rem) and (max-height: 50rem) {
       .capa-texto { padding-top: var(--v4); padding-bottom: var(--v4); }
       .marca { margin-bottom: var(--v4); }
-      h1 { font-size: clamp(2.4rem, 6.6svh, 2.8rem); margin-bottom: var(--v3); }
+      h1 { font-size: clamp(2.2rem, 6svh, 2.5rem); margin-bottom: var(--v3); }
       .capa .acao { margin-top: var(--v4); }
       .capa-creds { margin-top: var(--v4); }
     }
   </style>
 </head>
 <body>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPSJ8HHT"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager -->
 
 <!-- ══ BLOCO 1 · Abertura em tela cheia ══════════════════════ -->
 <header class="capa">
